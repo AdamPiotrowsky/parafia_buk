@@ -2,25 +2,215 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #1c1917;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
+  margin: 0;
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+  background: #92400e;
+  color: white;
+}
+
+/* =========================================================
+   TREŚĆ IMPORTOWANA Z WORD
+   ========================================================= */
+
+.document-content {
+  width: 100%;
+  color: #292524;
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+.document-content > *:first-child {
+  margin-top: 0;
+}
+
+.document-content > *:last-child {
+  margin-bottom: 0;
+}
+
+/* Nagłówki */
+
+.document-content h2 {
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+
+  color: #1c1917;
+
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.document-content h3 {
+  margin-top: 2rem;
+  margin-bottom: 0.8rem;
+
+  color: #292524;
+
+  font-size: 1.35rem;
+  font-weight: 650;
+  line-height: 1.35;
+}
+
+.document-content h4 {
+  margin-top: 1.5rem;
+  margin-bottom: 0.6rem;
+
+  color: #44403c;
+
+  font-size: 1.15rem;
+  font-weight: 650;
+}
+
+/* Akapity */
+
+.document-content p {
+  margin: 0.85rem 0;
+}
+
+/* Pogrubienia */
+
+.document-content strong,
+.document-content b {
+  color: #1c1917;
+  font-weight: 700;
+}
+
+/* Listy */
+
+.document-content ul,
+.document-content ol {
+  margin: 1rem 0;
+  padding-left: 1.8rem;
+}
+
+.document-content ul {
+  list-style-type: disc;
+}
+
+.document-content ol {
+  list-style-type: decimal;
+}
+
+.document-content li {
+  margin: 0.4rem 0;
+  padding-left: 0.25rem;
+}
+
+.document-content li::marker {
+  color: #92400e;
+  font-weight: 700;
+}
+
+/* Linki */
+
+.document-content a {
+  color: #92400e;
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-color: #d6d3d1;
+  text-underline-offset: 3px;
+
+  transition:
+    color 0.2s ease,
+    text-decoration-color 0.2s ease;
+}
+
+.document-content a:hover {
+  color: #78350f;
+  text-decoration-color: #78350f;
+}
+
+/* Cytaty */
+
+.document-content blockquote {
+  margin: 1.5rem 0;
+  padding: 1rem 1.5rem;
+
+  border-left: 4px solid #b45309;
+
+  background: #fffbeb;
+
+  color: #57534e;
+
+  font-style: italic;
+}
+
+/* Linie */
+
+.document-content hr {
+  margin: 2rem 0;
+
+  border: 0;
+  border-top: 1px solid #e7e5e4;
+}
+
+/* =========================================================
+   TABELE - bardzo ważne dla intencji
+   ========================================================= */
+
+.document-content table {
+  width: 100%;
+  min-width: 600px;
+
+  margin: 1.5rem 0;
+
+  border-collapse: collapse;
+
+  font-size: 0.95rem;
+}
+
+.document-content th {
+  padding: 0.85rem 1rem;
+
+  border: 1px solid #d6d3d1;
+
+  background: #f5f5f4;
+
+  color: #292524;
+
+  font-weight: 650;
+  text-align: left;
+}
+
+.document-content td {
+  padding: 0.85rem 1rem;
+
+  border: 1px solid #e7e5e4;
+
+  vertical-align: top;
+}
+
+.document-content tr:nth-child(even) td {
+  background: #fafaf9;
+}
+
+.document-content tr:hover td {
+  background: #fffbeb;
+
+  transition: background-color 0.2s ease;
 }
