@@ -1,425 +1,162 @@
 "use client";
 
+import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
-import {
-  ChevronDown,
-  Menu,
-  Radio,
-  X,
-} from "lucide-react";
+import { Clock, Megaphone, Menu, Radio, ScrollText, X } from "lucide-react";
 
-import { siteConfig } from "@/lib/site-config";
+import { TodayBar } from "@/components/today-bar";
+import { mainNav, site } from "@/lib/site";
+
+function isActive(pathname: string, href: string) {
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
 
 export function SiteHeader() {
   const pathname = usePathname();
-
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  const [mobileOpenSection, setMobileOpenSection] = useState<
-    string | null
-  >(null);
-
-  function isActive(href?: string) {
-    if (!href) return false;
-
-    if (href === "/") {
-      return pathname === "/";
-    }
-
-    return pathname === href || pathname.startsWith(`${href}/`);
-  }
-
-  function isGroupActive(
-    children?: {
-      label: string;
-      href: string;
-    }[]
-  ) {
-    if (!children) return false;
-
-    return children.some((child) => isActive(child.href));
-  }
-
-  function closeMobileMenu() {
-    setMobileMenuOpen(false);
-    setMobileOpenSection(null);
-  }
+  const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50">
-      {/* GÓRNY PASEK */}
-      <div className="hidden bg-stone-950 text-stone-300 lg:block">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-8 py-2 text-xs">
-          <div className="flex items-center gap-6">
-            <Link
-              href="/parafia/msze"
-              className="transition-colors duration-200 hover:text-white"
+    <>
+      <header className="sticky top-0 z-50">
+        <div className="bg-lapis-deep">
+          <div className="mx-auto flex max-w-7xl items-center gap-6 px-5 lg:px-8">
+            <a
+              href="https://archpoznan.pl"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden shrink-0 items-center gap-2 border-r border-gold/25 pr-6 text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-gold-light hover:text-gold-pale md:flex"
             >
-              Msze Święte
-            </Link>
-
-            <Link
-              href="/parafia/biuro-parafialne"
-              className="transition-colors duration-200 hover:text-white"
-            >
-              Biuro parafialne
-            </Link>
-
-            <Link
-              href="/kontakt"
-              className="transition-colors duration-200 hover:text-white"
-            >
-              Kontakt
-            </Link>
+              <span aria-hidden>✠</span> Archidiecezja Poznańska
+            </a>
+            <div className="min-w-0 flex-1">
+              <TodayBar />
+            </div>
           </div>
-
-          <Link
-            href="/kamera"
-            className="flex items-center gap-2 font-medium text-red-300 transition-colors duration-200 hover:text-red-200"
-          >
-            <span className="relative flex h-2.5 w-2.5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-70" />
-
-              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-red-500" />
-            </span>
-
-            Kamera online
-          </Link>
-        </div>
-      </div>
-
-      {/* GŁÓWNA NAWIGACJA */}
-      <div className="border-b border-stone-200 bg-white/95 shadow-sm backdrop-blur-md">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 lg:px-8">
-          {/* LOGO / NAZWA */}
-          <Link
-            href="/"
-            onClick={closeMobileMenu}
-            className="group flex min-h-20 flex-col justify-center py-3"
-          >
-            <span className="text-lg font-semibold tracking-tight text-stone-900 transition-colors duration-300 group-hover:text-amber-800">
-              Sanktuarium w Buku
-            </span>
-
-            <span className="hidden text-xs text-stone-500 sm:block">
-              Matki Bożej Bukowskiej Literackiej
-            </span>
-          </Link>
-
-          {/* DESKTOP MENU */}
-          <nav className="hidden h-20 items-stretch lg:flex">
-            {siteConfig.navigation.map((item) => {
-              const groupActive = isGroupActive(item.children);
-
-              if (item.children) {
-                return (
-                  <div
-                    key={item.label}
-                    className="group relative flex items-center"
-                  >
-                    <button
-                      type="button"
-                      className={`
-                        relative flex h-full items-center gap-1 px-3
-                        text-sm font-medium
-                        transition-all duration-300
-                        xl:px-4
-                        ${
-                          groupActive
-                            ? "text-amber-800"
-                            : "text-stone-700 hover:text-amber-800"
-                        }
-                      `}
-                    >
-                      {item.label}
-
-                      <ChevronDown
-                        size={15}
-                        className="transition-transform duration-300 group-hover:rotate-180"
-                      />
-
-                      <span
-                        className={`
-                          absolute bottom-0 left-1/2 h-[3px]
-                          -translate-x-1/2 rounded-full bg-amber-700
-                          transition-all duration-300
-                          ${
-                            groupActive
-                              ? "w-[calc(100%-24px)]"
-                              : "w-0 group-hover:w-[calc(100%-24px)]"
-                          }
-                        `}
-                      />
-                    </button>
-
-                    {/* DROPDOWN */}
-                    <div
-                      className="
-                        pointer-events-none absolute left-1/2 top-full
-                        w-72 -translate-x-1/2 translate-y-2
-                        opacity-0
-                        transition-all duration-200
-                        group-hover:pointer-events-auto
-                        group-hover:translate-y-0
-                        group-hover:opacity-100
-                      "
-                    >
-                      <div className="mt-0 overflow-hidden rounded-b-2xl border border-stone-200 bg-white p-2 shadow-xl shadow-stone-950/10">
-                        {item.children.map((child) => {
-                          const active = isActive(child.href);
-
-                          return (
-                            <Link
-                              key={child.href}
-                              href={child.href}
-                              className={`
-                                group/item flex items-center
-                                rounded-xl px-4 py-3
-                                text-sm
-                                transition-all duration-200
-                                ${
-                                  active
-                                    ? "bg-amber-50 font-semibold text-amber-900"
-                                    : "text-stone-700 hover:bg-stone-50 hover:pl-5 hover:font-medium hover:text-amber-800"
-                                }
-                              `}
-                            >
-                              <span
-                                className="
-                                  mr-0 h-1.5 w-0 rounded-full bg-amber-700
-                                  opacity-0 transition-all duration-200
-                                  group-hover/item:mr-3
-                                  group-hover/item:w-1.5
-                                  group-hover/item:opacity-100
-                                "
-                              />
-
-                              {child.label}
-                            </Link>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  </div>
-                );
-              }
-
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href!}
-                  className={`
-                    group relative flex h-full items-center px-3
-                    text-sm font-medium
-                    transition-all duration-300
-                    xl:px-4
-                    ${
-                      isActive(item.href)
-                        ? "text-amber-800"
-                        : "text-stone-700 hover:text-amber-800"
-                    }
-                  `}
-                >
-                  <span className="transition-transform duration-200 group-hover:-translate-y-[1px]">
-                    {item.label}
-                  </span>
-
-                  <span
-                    className={`
-                      absolute bottom-0 left-1/2 h-[3px]
-                      -translate-x-1/2 rounded-full bg-amber-700
-                      transition-all duration-300
-                      ${
-                        isActive(item.href)
-                          ? "w-[calc(100%-24px)]"
-                          : "w-0 group-hover:w-[calc(100%-24px)]"
-                      }
-                    `}
-                  />
-                </Link>
-              );
-            })}
-          </nav>
-
-          {/* KAMERA DESKTOP */}
-          <Link
-            href="/kamera"
-            className="
-              group hidden items-center gap-2
-              rounded-full bg-stone-950
-              px-5 py-2.5
-              text-sm font-semibold text-white
-              shadow-sm
-              transition-all duration-300
-              hover:-translate-y-0.5
-              hover:bg-amber-800
-              hover:shadow-md
-              lg:flex
-            "
-          >
-            <span className="relative flex h-2.5 w-2.5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-70" />
-
-              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-red-500" />
-            </span>
-
-            Kamera
-          </Link>
-
-          {/* MOBILE BUTTON */}
-          <button
-            type="button"
-            onClick={() => setMobileMenuOpen((value) => !value)}
-            className="
-              rounded-xl p-2.5 text-stone-700
-              transition-colors
-              hover:bg-stone-100
-              lg:hidden
-            "
-            aria-label="Menu"
-          >
-            {mobileMenuOpen ? (
-              <X size={26} />
-            ) : (
-              <Menu size={26} />
-            )}
-          </button>
         </div>
 
-        {/* MOBILE MENU */}
-        <div
-          className={`
-            overflow-hidden border-t border-stone-100 bg-white
-            transition-all duration-300 ease-in-out
-            lg:hidden
-            ${
-              mobileMenuOpen
-                ? "max-h-[1000px] opacity-100"
-                : "max-h-0 border-t-0 opacity-0"
-            }
-          `}
-        >
-          <nav className="mx-auto max-w-7xl px-5 py-4">
-            {/* KAMERA MOBILE */}
-            <Link
-              href="/kamera"
-              onClick={closeMobileMenu}
-              className="
-                mb-4 flex items-center justify-center gap-2
-                rounded-xl bg-stone-950
-                px-5 py-3.5
-                text-sm font-semibold text-white
-                transition-colors
-                hover:bg-amber-800
-              "
-            >
-              <Radio size={18} className="text-red-400" />
-
-              Kamera online
+        <div className="border-b border-line bg-parchment/95 backdrop-blur">
+          <div className="mx-auto flex h-[4.5rem] max-w-7xl items-center justify-between gap-6 px-5 lg:px-8">
+            <Link href="/" className="group flex items-center gap-3">
+              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-lapis ring-1 ring-gold/50 transition group-hover:ring-gold">
+                <Image src="/logo/postac-gold.png" alt="" width={40} height={40} className="h-10 w-10" priority />
+              </span>
+              <span className="leading-tight">
+                <span className="block font-display text-[1.35rem] font-semibold text-lapis">Sanktuarium w Buku</span>
+                <span className="block text-[0.68rem] uppercase tracking-[0.2em] text-ink-muted">
+                  Matki Bożej Bukowskiej Literackiej
+                </span>
+                <span className="block text-[0.62rem] font-semibold uppercase tracking-[0.2em] text-gold md:hidden">
+                  Archidiecezja Poznańska
+                </span>
+              </span>
             </Link>
 
-            {siteConfig.navigation.map((item) => {
-              if (item.children) {
-                const open = mobileOpenSection === item.label;
-
-                const active = isGroupActive(item.children);
-
-                return (
-                  <div
-                    key={item.label}
-                    className="border-b border-stone-100"
-                  >
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setMobileOpenSection(
-                          open ? null : item.label
-                        )
-                      }
-                      className={`
-                        flex w-full items-center justify-between
-                        py-4 text-left text-sm
-                        transition-colors
-                        ${
-                          active
-                            ? "font-semibold text-amber-800"
-                            : "font-medium text-stone-800 hover:text-amber-800"
-                        }
-                      `}
-                    >
-                      {item.label}
-
-                      <ChevronDown
-                        size={18}
-                        className={`
-                          transition-transform duration-300
-                          ${open ? "rotate-180" : ""}
-                        `}
-                      />
-                    </button>
-
-                    <div
-                      className={`
-                        overflow-hidden
-                        transition-all duration-300
-                        ${
-                          open
-                            ? "max-h-[600px] pb-3 opacity-100"
-                            : "max-h-0 opacity-0"
-                        }
-                      `}
-                    >
-                      <div className="ml-3 border-l border-stone-200 pl-3">
-                        {item.children.map((child) => (
-                          <Link
-                            key={child.href}
-                            href={child.href}
-                            onClick={closeMobileMenu}
-                            className={`
-                              block rounded-lg px-3 py-2.5
-                              text-sm
-                              transition-all duration-200
-                              ${
-                                isActive(child.href)
-                                  ? "bg-amber-50 font-semibold text-amber-900"
-                                  : "text-stone-600 hover:bg-stone-50 hover:pl-4 hover:text-amber-800"
-                              }
-                            `}
-                          >
-                            {child.label}
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                );
-              }
-
-              return (
+            <nav className="hidden items-center gap-1 xl:flex" aria-label="Główna nawigacja">
+              {mainNav.map((item) => (
                 <Link
                   key={item.href}
-                  href={item.href!}
-                  onClick={closeMobileMenu}
-                  className={`
-                    block border-b border-stone-100
-                    py-4 text-sm
-                    transition-all duration-200
-                    ${
-                      isActive(item.href)
-                        ? "font-semibold text-amber-800"
-                        : "font-medium text-stone-800 hover:pl-1 hover:text-amber-800"
-                    }
-                  `}
+                  href={item.href}
+                  className={`whitespace-nowrap rounded-full px-3.5 py-2 text-[0.88rem] font-medium transition ${
+                    isActive(pathname, item.href)
+                      ? "bg-lapis text-gold-pale"
+                      : "text-ink-soft hover:bg-parchment-deep hover:text-lapis"
+                  }`}
                 >
                   {item.label}
                 </Link>
-              );
-            })}
-          </nav>
+              ))}
+            </nav>
+
+            <div className="flex items-center gap-2">
+              <a
+                href={site.links.live}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hidden items-center gap-2 whitespace-nowrap rounded-full border border-wine/30 px-4 py-2 text-[0.85rem] font-semibold text-wine transition hover:bg-wine hover:text-white sm:flex"
+              >
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-60" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-red-600" />
+                </span>
+                Na żywo
+              </a>
+
+              <button
+                type="button"
+                onClick={() => setOpen((v) => !v)}
+                className="flex h-11 w-11 items-center justify-center rounded-full text-lapis hover:bg-parchment-deep xl:hidden"
+                aria-label={open ? "Zamknij menu" : "Otwórz menu"}
+                aria-expanded={open}
+              >
+                {open ? <X size={22} /> : <Menu size={22} />}
+              </button>
+            </div>
+          </div>
         </div>
+
+        {open && (
+          <div className="border-b border-line bg-parchment xl:hidden">
+            <nav className="mx-auto grid max-w-7xl gap-1 px-5 py-4 sm:grid-cols-2" aria-label="Menu mobilne">
+              {mainNav.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setOpen(false)}
+                  className={`rounded-lg px-4 py-3 font-display text-xl ${
+                    isActive(pathname, item.href) ? "bg-lapis text-gold-pale" : "text-lapis hover:bg-parchment-deep"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+          </div>
+        )}
+      </header>
+
+      <MobileDock pathname={pathname} />
+    </>
+  );
+}
+
+/* Dolny pasek na telefonie — najczęściej używane rzeczy pod kciukiem */
+function MobileDock({ pathname }: { pathname: string }) {
+  const items = [
+    { label: "Msze", href: "/msze", icon: Clock },
+    { label: "Ogłoszenia", href: "/ogloszenia", icon: Megaphone },
+    { label: "Intencje", href: "/intencje", icon: ScrollText },
+  ];
+
+  return (
+    <nav
+      className="fixed inset-x-0 bottom-0 z-50 border-t border-gold/30 bg-lapis-deep/95 pb-[env(safe-area-inset-bottom)] backdrop-blur sm:hidden"
+      aria-label="Szybki dostęp"
+    >
+      <div className="grid grid-cols-4">
+        {items.map(({ label, href, icon: Icon }) => (
+          <Link
+            key={href}
+            href={href}
+            className={`flex flex-col items-center gap-1 py-2.5 text-[0.68rem] font-medium ${
+              isActive(pathname, href) ? "text-gold-light" : "text-gold-pale/70"
+            }`}
+          >
+            <Icon size={20} strokeWidth={1.6} />
+            {label}
+          </Link>
+        ))}
+        <a
+          href={site.links.live}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex flex-col items-center gap-1 py-2.5 text-[0.68rem] font-medium text-gold-pale/70"
+        >
+          <Radio size={20} strokeWidth={1.6} className="text-red-400" />
+          Na żywo
+        </a>
       </div>
-    </header>
+    </nav>
   );
 }

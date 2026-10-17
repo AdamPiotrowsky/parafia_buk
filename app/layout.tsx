@@ -1,9 +1,17 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Cormorant_Garamond, Manrope } from "next/font/google";
 import "./globals.css";
 
-const geist = Geist({
-  subsets: ["latin"],
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin", "latin-ext"],
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-cormorant",
+});
+
+const manrope = Manrope({
+  subsets: ["latin", "latin-ext"],
+  variable: "--font-manrope",
 });
 
 export const metadata: Metadata = {
@@ -12,7 +20,7 @@ export const metadata: Metadata = {
     template: "%s | Sanktuarium w Buku",
   },
   description:
-    "Oficjalna strona Sanktuarium Matki Bożej Bukowskiej Literackiej i Parafii pw. św. Stanisława Biskupa w Buku.",
+    "Sanktuarium Matki Bożej Bukowskiej Literackiej i Parafia pw. św. Stanisława Biskupa i Męczennika w Buku. Msze Święte, ogłoszenia, intencje i historia.",
 };
 
 export default function RootLayout({
@@ -21,10 +29,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pl">
-      <body className={geist.className}>
-        {children}
-      </body>
+    <html lang="pl" className={`${cormorant.variable} ${manrope.variable}`}>
+      <body>{children}</body>
     </html>
   );
 }

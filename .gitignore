@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# oryginały zdjęć i filmów (duże pliki, na stronę idą wersje z public/images)
+/materialy/

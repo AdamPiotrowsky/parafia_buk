@@ -1,17 +1,25 @@
+import type { Metadata } from "next";
+
+import { AsideLink, BulletinView } from "@/components/bulletin-view";
+import { PageHeader } from "@/components/page-header";
+import { currentIntentions } from "@/lib/bulletins";
+import { site } from "@/lib/site";
+
+export const metadata: Metadata = { title: "Intencje mszalne" };
+
 export default function IntencjePage() {
   return (
-    <div className="mx-auto max-w-4xl px-5 py-16">
-      <p className="text-sm font-medium uppercase tracking-widest text-stone-500">
-        Liturgia
-      </p>
-
-      <h1 className="mt-2 text-4xl font-semibold tracking-tight">
-        Intencje mszalne
-      </h1>
-
-      <div className="mt-10 rounded-2xl border border-stone-200 p-8">
-        Tutaj będziemy prezentować aktualne intencje.
-      </div>
-    </div>
+    <>
+      <PageHeader eyebrow="Bieżący tydzień" title="Intencje mszalne" />
+      <BulletinView
+        bulletin={currentIntentions}
+        aside={
+          <>
+            <AsideLink href="/kontakt" title="Zamów Mszę" text="Intencje przyjmuje kancelaria parafialna" />
+            <AsideLink href={site.links.petitions} title="Prośby do Matki Bożej" text="Odczytywane w czwartki" />
+          </>
+        }
+      />
+    </>
   );
 }
