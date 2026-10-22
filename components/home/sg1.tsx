@@ -127,7 +127,7 @@ export function HomeSg1() {
           </div>
           <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-line pt-6">
             <p className="text-sm text-ink-soft">
-              <strong className="text-ink">Kancelaria:</strong>{" "}
+              <strong className="text-ink">Biuro parafialne:</strong>{" "}
               {site.officeHours.map((o) => `${o.days} ${o.hours}`).join(" · ")}
             </p>
             <Link href="/msze" className="inline-flex items-center gap-1 text-sm font-semibold text-lapis hover:text-gold">

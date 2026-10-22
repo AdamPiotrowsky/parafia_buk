@@ -22,7 +22,7 @@ export const currentAnnouncements: Bulletin = {
 <li>Nabożeństwa różańcowe w dni powszednie o 18:00, w niedziele o 17:45. Dzieci zapraszamy w środę po Mszy wieczornej.</li>
 <li>W czwartek przed Mszą Świętą o 18:30 odczytamy prośby i podziękowania skierowane do Matki Bożej Bukowskiej Literackiej.</li>
 <li>W środę, 22 października, wspomnienie św. Jana Pawła II.</li>
-<li>Kancelaria parafialna czynna we wtorek, czwartek, piątek i sobotę w godz. 9:00–11:00 oraz w środę w godz. 16:00–18:00.</li>
+<li>Biuro parafialne czynne we wtorek, czwartek, piątek i sobotę w godz. 9:00–11:00 oraz w środę w godz. 16:00–18:00.</li>
 </ol>
 <blockquote>Bóg zapłać za każdą ofiarę składaną na potrzeby sanktuarium.</blockquote>
 `,

@@ -157,7 +157,7 @@ export function Showroom({ variants }: { variants: Variant[] }) {
             </button>
             <div>
               <p className="text-[0.65rem] font-bold uppercase tracking-[0.25em] text-gold-light">
-                Propozycja {current.id} z {variants.length}
+                SG{current.id} · propozycja {index + 1} z {variants.length}
               </p>
               <h1 className="font-display text-3xl font-semibold leading-none">{current.name}</h1>
             </div>

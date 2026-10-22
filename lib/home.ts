@@ -24,12 +24,12 @@ export type Shortcut = {
 export const shortcuts: Shortcut[] = [
   { title: "Ogłoszenia", hint: "Na ten tydzień", href: "/ogloszenia", icon: Megaphone },
   { title: "Intencje", hint: "Msze w intencjach", href: "/intencje", icon: ScrollText },
-  { title: "Msze Święte", hint: "Porządek nabożeństw", href: "/msze", icon: Clock },
+  { title: "Msze i sakramenty", hint: "Porządek Mszy, sakramenty", href: "/msze", icon: Clock },
   { title: "Transmisja", hint: "Na żywo z fary", href: site.links.live, icon: Radio, external: true },
   { title: "Prośby i podziękowania", hint: "Do Matki Bożej", href: site.links.petitions, icon: HandHeart, external: true },
   { title: "Adoracja", hint: "Zapisz się na godzinę", href: site.links.adoration, icon: Flame, external: true },
-  { title: "Kancelaria", hint: "Godziny i kontakt", href: "/kontakt", icon: Phone },
-  { title: "Grafik salek", hint: "Dla wspólnot", href: site.links.rooms, icon: CalendarDays, external: true },
+  { title: "Biuro parafialne", hint: "Godziny i kontakt", href: "/kontakt", icon: Phone },
+  { title: "Grafik salek", hint: "Dla wspólnot", href: "/parafia/grafik-salek", icon: CalendarDays },
 ];
 
 export const keyYears = [
@@ -57,13 +57,6 @@ export const variants = [
     text: "Jak ołtarz skrzydłowy: po lewej wysuwa się obraz Matki Bożej, po prawej kościół — w środku najważniejsze informacje.",
   },
   {
-    id: 3,
-    href: "/sg3",
-    image: "/images/fara-front.jpg",
-    name: "Dziś w parafii",
-    text: "Praktyczny pulpit: najbliższa Msza, święty dnia, ogłoszenia i intencje od razu na pierwszym ekranie. Duże, czytelne litery.",
-  },
-  {
     id: 4,
     href: "/sg4",
     image: "/images/swiety-krzyz-zewnatrz.jpg",
@@ -73,15 +66,15 @@ export const variants = [
   {
     id: 5,
     href: "/sg5",
-    image: "/images/swiety-krzyz-wnetrze.jpg",
-    name: "Księga",
-    text: "Nawiązanie do „Literackiej”: strona jak otwarta, iluminowana księga — po lewej obraz i jego dzieje, po prawej kalendarz dnia i spis treści.",
+    image: "/images/fara-oltarz.jpg",
+    name: "Biel i złoto",
+    text: "Jasna, biała strona — ołtarz fary w dużym łukowym oknie jak w prezbiterium, pod nim najbliższa Msza i święty dnia.",
   },
   {
     id: 6,
     href: "/sg6",
-    image: "/images/fara-z-lotu.jpg",
-    name: "Jasna",
-    text: "Nowocześnie i lekko: jasna siatka kafelków ze zdjęciami, filmem z drona i najważniejszymi informacjami — wszystko widać od razu.",
+    image: "/images/fara-front.jpg",
+    name: "Nawa",
+    text: "Po lewej ołtarz na całą wysokość, po prawej biała kolumna z wysuwanymi panelami: obraz, fara, kościół św. Krzyża i Msze.",
   },
 ];

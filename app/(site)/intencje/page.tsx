@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import { AsideLink, BulletinView } from "@/components/bulletin-view";
 import { PageHeader } from "@/components/page-header";
 import { currentIntentions } from "@/lib/bulletins";
-import { site } from "@/lib/site";
 
 export const metadata: Metadata = { title: "Intencje mszalne" };
 
@@ -15,8 +14,8 @@ export default function IntencjePage() {
         bulletin={currentIntentions}
         aside={
           <>
-            <AsideLink href="/kontakt" title="Zamów Mszę" text="Intencje przyjmuje kancelaria parafialna" />
-            <AsideLink href={site.links.petitions} title="Prośby do Matki Bożej" text="Odczytywane w czwartki" />
+            <AsideLink href="/ogloszenia" title="Ogłoszenia" text="Ogłoszenia duszpasterskie na ten tydzień" />
+            <AsideLink href="/kontakt" title="Biuro parafialne" text="Zamów Mszę Świętą w swojej intencji" />
           </>
         }
       />

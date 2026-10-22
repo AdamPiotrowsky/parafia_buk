@@ -28,7 +28,7 @@ export function TodayBar() {
   const now = useWarsawNow();
   if (!now) return <div className="h-9" />;
 
-  const saint = saintOfDay(now.month, now.day);
+  const saint = saintOfDay(now.year, now.month, now.day);
   const mass = nextMass(now);
 
   return (
@@ -52,17 +52,20 @@ export function TodayBar() {
   );
 }
 
-export function NextMassCard() {
+export function NextMassCard({ tone = "dark" }: { tone?: "dark" | "light" }) {
   const now = useWarsawNow();
   const mass = now ? nextMass(now) : null;
+  const light = tone === "light";
 
   return (
     <div>
-      <p className="text-[0.7rem] font-bold uppercase tracking-[0.25em] text-gold-light">Najbliższa Msza Święta</p>
-      <p className="mt-2 font-display text-6xl font-semibold leading-none text-gold-pale tabular-nums">
+      <p className={`text-[0.7rem] font-bold uppercase tracking-[0.25em] ${light ? "text-gold" : "text-gold-light"}`}>
+        Najbliższa Msza Święta
+      </p>
+      <p className={`mt-2 font-display text-6xl font-semibold leading-none tabular-nums ${light ? "text-lapis" : "text-gold-pale"}`}>
         {mass ? mass.time : "—"}
       </p>
-      <p className="mt-2 text-sm text-gold-pale/70">
+      <p className={`mt-2 text-sm ${light ? "text-ink-muted" : "text-gold-pale/70"}`}>
         {mass ? `${mass.when} · ${inWords(mass.inMinutes)}` : " "}
       </p>
     </div>
@@ -72,7 +75,7 @@ export function NextMassCard() {
 export function SaintOfDayCard() {
   const now = useWarsawNow();
   if (!now) return <div className="h-40" />;
-  const saint = saintOfDay(now.month, now.day);
+  const saint = saintOfDay(now.year, now.month, now.day);
 
   return (
     <div>

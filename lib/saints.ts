@@ -6,11 +6,22 @@
  * Klucz: "MM-DD".
  */
 
-export type Rank = "uroczystość" | "święto" | "wspomnienie" | "wspomnienie dowolne";
+export type Rank = "dzień szczególny" | "uroczystość" | "święto" | "wspomnienie" | "wspomnienie dowolne";
+
+/* Pierwszeństwo dni liturgicznych — im mniejsza liczba, tym ważniejszy dzień */
+export const rankOrder: Record<Rank, number> = {
+  "dzień szczególny": 0,
+  uroczystość: 1,
+  święto: 2,
+  wspomnienie: 3,
+  "wspomnienie dowolne": 4,
+};
 
 export type CalendarEntry = {
   name: string;
   rank: Rank;
+  /** Święto ruchome — data liczona co roku od Wielkanocy lub Adwentu. */
+  movable?: boolean;
   /** Krótka notka, gdy dzień ma szczególny związek z Bukiem. */
   local?: string;
 };
@@ -42,6 +53,7 @@ export const saintsCalendar: Record<string, CalendarEntry> = {
   "03-19": { name: "Św. Józefa, Oblubieńca NMP", rank: "uroczystość" },
   "03-25": { name: "Zwiastowanie Pańskie", rank: "uroczystość" },
 
+  "04-07": { name: "Św. Jana Chrzciciela de la Salle", rank: "wspomnienie" },
   "04-23": {
     name: "Św. Wojciecha, biskupa i męczennika, głównego patrona Polski",
     rank: "uroczystość",
@@ -85,6 +97,7 @@ export const saintsCalendar: Record<string, CalendarEntry> = {
   "07-16": { name: "Najświętszej Maryi Panny z Góry Karmel", rank: "wspomnienie dowolne" },
   "07-22": { name: "Św. Marii Magdaleny", rank: "święto" },
   "07-23": { name: "Św. Brygidy, patronki Europy", rank: "święto" },
+  "07-24": { name: "Św. Kingi, dziewicy", rank: "wspomnienie" },
   "07-25": { name: "Św. Jakuba Apostoła", rank: "święto" },
   "07-26": { name: "Świętych Joachima i Anny, rodziców NMP", rank: "wspomnienie" },
   "07-29": { name: "Świętych Marty, Marii i Łazarza", rank: "wspomnienie" },
@@ -100,6 +113,7 @@ export const saintsCalendar: Record<string, CalendarEntry> = {
   "08-14": { name: "Św. Maksymiliana Marii Kolbego", rank: "wspomnienie" },
   "08-15": { name: "Wniebowzięcie Najświętszej Maryi Panny", rank: "uroczystość" },
   "08-20": { name: "Św. Bernarda", rank: "wspomnienie" },
+  "08-21": { name: "Św. Piusa X, papieża", rank: "wspomnienie" },
   "08-22": { name: "Najświętszej Maryi Panny Królowej", rank: "wspomnienie" },
   "08-24": { name: "Św. Bartłomieja Apostoła", rank: "święto" },
   "08-26": { name: "Najświętszej Maryi Panny Częstochowskiej", rank: "uroczystość" },
@@ -122,6 +136,7 @@ export const saintsCalendar: Record<string, CalendarEntry> = {
   "09-15": { name: "Najświętszej Maryi Panny Bolesnej", rank: "wspomnienie" },
   "09-16": { name: "Świętych Korneliusza i Cypriana", rank: "wspomnienie" },
   "09-18": { name: "Św. Stanisława Kostki, patrona Polski", rank: "święto" },
+  "09-20": { name: "Świętych Andrzeja Kim Taegon, Pawła Chong Hasang i Towarzyszy", rank: "wspomnienie" },
   "09-21": { name: "Św. Mateusza, Apostoła i Ewangelisty", rank: "święto" },
   "09-23": { name: "Św. Pio z Pietrelciny", rank: "wspomnienie" },
   "09-27": { name: "Św. Wincentego a Paulo", rank: "wspomnienie" },
@@ -134,8 +149,10 @@ export const saintsCalendar: Record<string, CalendarEntry> = {
   "10-05": { name: "Św. Faustyny Kowalskiej", rank: "wspomnienie dowolne" },
   "10-07": { name: "Najświętszej Maryi Panny Różańcowej", rank: "wspomnienie" },
   "10-15": { name: "Św. Teresy od Jezusa", rank: "wspomnienie" },
+  "10-16": { name: "Św. Jadwigi Śląskiej", rank: "wspomnienie" },
   "10-17": { name: "Św. Ignacego Antiocheńskiego", rank: "wspomnienie" },
   "10-18": { name: "Św. Łukasza Ewangelisty", rank: "święto" },
+  "10-20": { name: "Św. Jana Kantego, prezbitera", rank: "wspomnienie" },
   "10-22": { name: "Św. Jana Pawła II, papieża", rank: "wspomnienie" },
   "10-28": { name: "Świętych Apostołów Szymona i Judy Tadeusza", rank: "święto" },
 
@@ -164,6 +181,91 @@ export const saintsCalendar: Record<string, CalendarEntry> = {
   "12-26": { name: "Św. Szczepana, pierwszego męczennika", rank: "święto" },
   "12-27": { name: "Św. Jana, Apostoła i Ewangelisty", rank: "święto" },
   "12-28": { name: "Świętych Młodzianków, męczenników", rank: "święto" },
+};
+
+/*
+ * Wspomnienia dowolne — te same daty co roku, obok głównego obchodu dnia.
+ */
+export const optionalMemorials: Record<string, string[]> = {
+  "01-03": ["Najświętszego Imienia Jezus"],
+  "01-07": ["Św. Rajmunda z Penyafort"],
+  "01-13": ["Św. Hilarego"],
+  "01-19": ["Św. Józefa Sebastiana Pelczara"],
+  "01-20": ["Św. Fabiana, papieża, i św. Sebastiana, męczenników"],
+  "01-22": ["Św. Wincentego, diakona i męczennika"],
+  "01-27": ["Św. Anieli Merici"],
+  "02-08": ["Św. Hieronima Emilianiego", "Św. Józefiny Bakhity"],
+  "02-17": ["Siedmiu Świętych Założycieli Zakonu Serwitów"],
+  "02-21": ["Św. Piotra Damianiego"],
+  "03-08": ["Św. Jana Bożego"],
+  "03-09": ["Św. Franciszki Rzymianki"],
+  "03-17": ["Św. Patryka"],
+  "03-18": ["Św. Cyryla Jerozolimskiego"],
+  "03-23": ["Św. Turybiusza z Mongrovejo"],
+  "04-02": ["Św. Franciszka z Paoli"],
+  "04-04": ["Św. Izydora"],
+  "04-05": ["Św. Wincentego Ferreriusza"],
+  "04-13": ["Św. Marcina I, papieża"],
+  "04-21": ["Św. Anzelma"],
+  "04-24": ["Św. Fidelisa z Sigmaringen"],
+  "04-28": ["Św. Piotra Chanel", "Św. Ludwika Marii Grignion de Montfort"],
+  "04-30": ["Św. Piusa V, papieża"],
+  "05-12": ["Świętych Nereusza i Achillesa", "Św. Pankracego"],
+  "05-13": ["Najświętszej Maryi Panny Fatimskiej"],
+  "05-18": ["Św. Jana I, papieża"],
+  "05-20": ["Św. Bernardyna ze Sieny"],
+  "05-21": ["Świętych Krzysztofa Magallanesa i Towarzyszy"],
+  "05-22": ["Św. Rity z Cascii"],
+  "05-24": ["Najświętszej Maryi Panny Wspomożycielki Wiernych"],
+  "05-25": ["Św. Bedy Czcigodnego", "Św. Grzegorza VII, papieża", "Św. Marii Magdaleny de' Pazzi"],
+  "05-27": ["Św. Augustyna z Canterbury"],
+  "06-02": ["Świętych Marcelina i Piotra"],
+  "06-06": ["Św. Norberta"],
+  "06-09": ["Św. Efrema"],
+  "06-19": ["Św. Romualda"],
+  "06-22": ["Św. Paulina z Noli", "Świętych Jana Fishera i Tomasza More"],
+  "06-27": ["Św. Cyryla Aleksandryjskiego", "Najświętszej Maryi Panny Nieustającej Pomocy"],
+  "06-30": ["Świętych Pierwszych Męczenników Kościoła Rzymskiego"],
+  "07-04": ["Św. Elżbiety Portugalskiej"],
+  "07-05": ["Św. Antoniego Marii Zaccarii"],
+  "07-06": ["Św. Marii Goretti"],
+  "07-09": ["Świętych Augustyna Zhao Rong i Towarzyszy"],
+  "07-13": ["Św. Henryka"],
+  "07-14": ["Św. Kamila de Lellis"],
+  "07-20": ["Św. Apolinarego"],
+  "07-21": ["Św. Wawrzyńca z Brindisi"],
+  "07-30": ["Św. Piotra Chryzologa"],
+  "08-02": ["Św. Euzebiusza z Vercelli", "Św. Piotra Juliana Eymarda"],
+  "08-07": ["Świętych Sykstusa II i Towarzyszy", "Św. Kajetana"],
+  "08-13": ["Świętych Poncjana i Hipolita"],
+  "08-16": ["Św. Stefana Węgierskiego"],
+  "08-19": ["Św. Jana Eudesa"],
+  "08-23": ["Św. Róży z Limy"],
+  "08-25": ["Św. Ludwika", "Św. Józefa Kalasantego"],
+  "09-09": ["Św. Piotra Klawera"],
+  "09-12": ["Najświętszego Imienia Maryi"],
+  "09-17": ["Św. Roberta Bellarmina"],
+  "09-19": ["Św. Januarego"],
+  "09-26": ["Świętych Kosmy i Damiana"],
+  "09-28": ["Św. Wacława", "Świętych Wawrzyńca Ruiz i Towarzyszy"],
+  "10-06": ["Św. Brunona"],
+  "10-09": ["Świętych Dionizego i Towarzyszy", "Św. Jana Leonardiego"],
+  "10-14": ["Św. Kaliksta I, papieża"],
+  "10-16": ["Św. Małgorzaty Marii Alacoque"],
+  "10-19": ["Świętych Jana de Brébeuf, Izaaka Joguesa i Towarzyszy", "Św. Pawła od Krzyża"],
+  "10-23": ["Św. Jana Kapistrana"],
+  "10-24": ["Św. Antoniego Marii Clareta"],
+  "11-03": ["Św. Marcina de Porres"],
+  "11-15": ["Św. Alberta Wielkiego"],
+  "11-16": ["Św. Gertrudy", "Św. Małgorzaty Szkockiej"],
+  "11-18": ["Rocznica poświęcenia bazylik św. Piotra i św. Pawła"],
+  "11-25": ["Św. Katarzyny Aleksandryjskiej"],
+  "12-09": ["Św. Juana Diego"],
+  "12-11": ["Św. Damazego I, papieża"],
+  "12-12": ["Najświętszej Maryi Panny z Guadalupe"],
+  "12-21": ["Św. Piotra Kanizjusza"],
+  "12-29": ["Św. Tomasza Becketa"],
+  "12-31": ["Św. Sylwestra I, papieża"],
 };
 
 export const monthNames = [

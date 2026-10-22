@@ -7,6 +7,11 @@ const nextConfig: NextConfig = {
    * ale skrypty są blokowane i nic nie da się kliknąć.
    */
   allowedDevOrigins: ["192.168.1.12", "192.168.1.*", "192.168.0.*"],
+
+  images: {
+    /* Zdjęcia galerii i aktualności ze starej strony — do czasu przeniesienia folderu uploads */
+    remotePatterns: [{ protocol: "https", hostname: "sanktuarium-buk.pl", pathname: "/uploads/**" }],
+  },
 };
 
 export default nextConfig;

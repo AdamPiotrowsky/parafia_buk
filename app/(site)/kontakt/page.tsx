@@ -1,24 +1,25 @@
 import type { Metadata } from "next";
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
 
+import { CopyButton } from "@/components/copy-button";
 import { PageHeader } from "@/components/page-header";
 import { site } from "@/lib/site";
 
-export const metadata: Metadata = { title: "Kontakt i kancelaria" };
+export const metadata: Metadata = { title: "Kontakt i biuro parafialne" };
 
 export default function KontaktPage() {
   const mapSrc = `https://maps.google.com/maps?q=${encodeURIComponent("ul. Mury 30, 64-320 Buk")}&z=16&output=embed`;
 
   return (
     <>
-      <PageHeader eyebrow={site.diocese} title="Kontakt i kancelaria" lead={site.parish} />
+      <PageHeader eyebrow={site.diocese} title="Kontakt i biuro parafialne" lead={site.parish} />
 
       <section className="mx-auto grid max-w-7xl gap-6 px-5 py-16 lg:grid-cols-2 lg:px-8">
         <div className="space-y-6">
           <div className="rounded-2xl border border-line bg-vellum p-8">
             <div className="flex items-center gap-3 text-gold">
               <Clock size={22} strokeWidth={1.6} />
-              <p className="text-[0.72rem] font-bold uppercase tracking-[0.25em]">Kancelaria parafialna</p>
+              <p className="text-[0.72rem] font-bold uppercase tracking-[0.25em]">Biuro parafialne</p>
             </div>
             <dl className="mt-6 divide-y divide-line">
               {site.officeHours.map((o) => (
@@ -51,7 +52,8 @@ export default function KontaktPage() {
             <p className="mt-4 font-display text-3xl font-semibold text-lapis">{site.address.street}</p>
             <p className="text-lg text-ink-soft">{site.address.city}</p>
             <p className="mt-6 text-[0.72rem] font-bold uppercase tracking-[0.25em] text-gold">Numer konta</p>
-            <p className="mt-2 font-mono text-ink">{site.bankAccount}</p>
+            <p className="mt-2 font-mono text-lg text-ink">{site.bankAccount}</p>
+            <CopyButton value={site.bankAccount.replace(/\s/g, "")} tone="light" />
           </div>
         </div>
 

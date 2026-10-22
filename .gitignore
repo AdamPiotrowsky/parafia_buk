@@ -42,3 +42,7 @@ next-env.d.ts
 
 # oryginały zdjęć i filmów (duże pliki, na stronę idą wersje z public/images)
 /materialy/
+
+# grafik salek — bieżące rezerwacje (zapisywane przez stronę; wzór startowy w data/salki.seed.json)
+/data/salki.json
+/data/salki-log.json

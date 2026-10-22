@@ -29,18 +29,34 @@ export const site = {
   },
 };
 
-export type NavItem = { label: string; href: string };
+export type NavLink = { label: string; href: string };
+export type NavItem = NavLink & { children?: NavLink[] };
 
 export const mainNav: NavItem[] = [
-  { label: "Msze Święte", href: "/msze" },
+  { label: "Msze i sakramenty", href: "/msze" },
   { label: "Ogłoszenia", href: "/ogloszenia" },
-  { label: "Intencje", href: "/intencje" },
-  { label: "Sanktuarium", href: "/sanktuarium" },
-  { label: "Kościoły", href: "/koscioly" },
-  { label: "Święci", href: "/swieci" },
-  { label: "Parafia", href: "/parafia" },
+  { label: "Aktualności", href: "/aktualnosci" },
+  { label: "Galeria", href: "/galeria" },
+  {
+    label: "Parafia",
+    href: "/parafia",
+    children: [
+      { label: "Sanktuarium", href: "/sanktuarium" },
+      { label: "Kościoły", href: "/koscioly" },
+      { label: "Duszpasterze", href: "/parafia/duszpasterze" },
+      { label: "Wspólnoty", href: "/parafia/wspolnoty" },
+      { label: "Święci", href: "/swieci" },
+      { label: "Ochrona dzieci", href: "/parafia/ochrona-dzieci" },
+      { label: "Gazetka parafialna", href: "/gazetka" },
+      { label: "Grafik salek", href: "/parafia/grafik-salek" },
+      { label: "Życie parafii", href: "/parafia" },
+    ],
+  },
   { label: "Kontakt", href: "/kontakt" },
 ];
+
+/* Wszystkie linki menu w jednej liście (stopka, mapa strony) */
+export const flatNav: NavLink[] = mainNav.flatMap((item) => (item.children ? item.children : [item]));
 
 /*
  * Porządek Mszy Świętych.

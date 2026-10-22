@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Baby, CalendarDays, HeartHandshake, Shield, Sparkles, Users } from "lucide-react";
+import { ArrowRight, Baby, CalendarDays, HeartHandshake, Newspaper, Shield, Sparkles, Users } from "lucide-react";
 
 import { PageHeader } from "@/components/page-header";
 
@@ -11,12 +11,13 @@ export const metadata: Metadata = { title: "Parafia" };
  * (dump bazy SQL). Karty pokazują docelowy układ.
  */
 const sections = [
-  { icon: Baby, title: "Sakramenty", text: "Chrzest, I Komunia, małżeństwo, namaszczenie chorych — co przygotować i kiedy przyjść.", href: "/msze" },
-  { icon: Sparkles, title: "Bierzmowanie", text: "Spotkania, terminy i informacje dla kandydatów oraz rodziców." },
-  { icon: Users, title: "Wspólnoty", text: "Róże różańcowe, ministranci, schola, chór i grupy działające przy parafii." },
+  { icon: Baby, title: "Msze i sakramenty", text: "Chrzest, bierzmowanie, spowiedź, namaszczenie chorych, małżeństwo — co przygotować i kiedy przyjść.", href: "/msze" },
+  { icon: Sparkles, title: "Bierzmowanie", text: "Spotkania, terminy i informacje dla kandydatów oraz rodziców.", href: "/bierzmowanie" },
+  { icon: Users, title: "Wspólnoty", text: "Róże różańcowe, ministranci, chórek i grupy działające przy parafii.", href: "/parafia/wspolnoty" },
   { icon: CalendarDays, title: "Plan kolędy", text: "Kolejność odwiedzin duszpasterskich w ulicach i wsiach parafii." },
-  { icon: HeartHandshake, title: "Nasza wspólnota", text: "Duszpasterze i osoby posługujące w parafii." },
-  { icon: Shield, title: "Ochrona dzieci", text: "Standardy ochrony dzieci i młodzieży obowiązujące w parafii." },
+  { icon: HeartHandshake, title: "Duszpasterze", text: "Kapłani i osoby posługujące w parafii.", href: "/parafia/duszpasterze" },
+  { icon: Shield, title: "Ochrona dzieci", text: "Standardy ochrony dzieci i młodzieży obowiązujące w parafii.", href: "/parafia/ochrona-dzieci" },
+  { icon: Newspaper, title: "Gazetka parafialna", text: "Kolejne numery gazetki do przeczytania i pobrania.", href: "/gazetka" },
 ];
 
 export default function ParafiaPage() {

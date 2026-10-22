@@ -41,10 +41,13 @@ body {
   color: var(--color-gold-pale);
 }
 
-:focus-visible {
-  outline: 2px solid var(--color-gold);
-  outline-offset: 3px;
-  border-radius: 4px;
+/* W warstwie base, żeby klasy Tailwinda (np. focus-visible:outline-none) mogły to nadpisać */
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
 }
 
 /* Delikatna faktura pergaminu */
@@ -243,45 +246,13 @@ body {
   }
 }
 
-/* Księga (propozycja 5): strony rozkładają się przy wejściu */
-.book {
-  perspective: 2400px;
-}
-
-.book-page {
-  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.6);
-  background-image: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.7), transparent 60%),
-    linear-gradient(rgba(168, 130, 58, 0.06), rgba(168, 130, 58, 0.06));
-}
-
-@media (min-width: 1024px) {
-  .book-left {
-    transform-origin: right center;
-    animation: book-open-left 1.6s cubic-bezier(0.22, 1, 0.36, 1) both;
-    background-image: linear-gradient(to left, rgba(80, 55, 20, 0.22), transparent 12%),
-      radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.7), transparent 60%);
-  }
-
-  .book-right {
-    transform-origin: left center;
-    animation: book-open-right 1.6s cubic-bezier(0.22, 1, 0.36, 1) both;
-    background-image: linear-gradient(to right, rgba(80, 55, 20, 0.22), transparent 12%),
-      radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.7), transparent 60%);
-  }
-}
-
-@keyframes book-open-left {
-  from {
-    transform: rotateY(70deg);
-    opacity: 0;
-  }
-}
-
-@keyframes book-open-right {
-  from {
-    transform: rotateY(-70deg);
-    opacity: 0;
-  }
+/* Wpisy przeniesione ze starej strony: obrazy i plakaty w treści */
+.news-content img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1.5rem auto;
+  border-radius: 0.75rem;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -289,9 +260,7 @@ body {
     scroll-behavior: auto;
   }
 
-  .hero-zoom,
-  .book-left,
-  .book-right {
+  .hero-zoom {
     animation: none;
   }
 }

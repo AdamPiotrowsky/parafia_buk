@@ -38,7 +38,7 @@ export function BulletinView({
 function PrintHint() {
   return (
     <div className="rounded-2xl border border-line p-6 text-sm leading-6 text-ink-muted">
-      Treść publikowana jest co tydzień. Pytania? Zadzwoń do kancelarii: <br />
+      Treść publikowana jest co tydzień. Pytania? Zadzwoń do biura parafialnego: <br />
       <a href="tel:618140141" className="font-semibold text-lapis">61 8140 141</a>
     </div>
   );

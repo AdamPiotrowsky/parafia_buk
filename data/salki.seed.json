@@ -1,0 +1,302 @@
+[
+ {
+  "date": "2026-09-04",
+  "hour": 16,
+  "room": "duza",
+  "who": "Bierzmowani klasa 8"
+ },
+ {
+  "date": "2026-09-04",
+  "hour": 17,
+  "room": "duza",
+  "who": "Bierzmowani klasa 8"
+ },
+ {
+  "date": "2026-09-14",
+  "hour": 18,
+  "room": "biblioteka",
+  "who": "Bierzmowani klasa 8"
+ },
+ {
+  "date": "2026-09-16",
+  "hour": 18,
+  "room": "biblioteka",
+  "who": "Bierzmowani klasa 8"
+ },
+ {
+  "date": "2026-09-21",
+  "hour": 18,
+  "room": "duza",
+  "who": "Bierzmowani klasa 8"
+ },
+ {
+  "date": "2026-09-24",
+  "hour": 19,
+  "room": "biblioteka",
+  "who": "Katecheza przed chrztem"
+ },
+ {
+  "date": "2026-09-21",
+  "hour": 19,
+  "room": "duza",
+  "who": "Przymierze Miłosierdzia"
+ },
+ {
+  "date": "2026-09-23",
+  "hour": 19,
+  "room": "duza",
+  "who": "Dobrem Zwyciężaj"
+ },
+ {
+  "date": "2026-09-30",
+  "hour": 19,
+  "room": "duza",
+  "who": "Dobrem Zwyciężaj"
+ },
+ {
+  "date": "2026-09-21",
+  "hour": 20,
+  "room": "duza",
+  "who": "Przymierze Miłosierdzia"
+ },
+ {
+  "date": "2026-09-23",
+  "hour": 20,
+  "room": "duza",
+  "who": "Dobrem Zwyciężaj"
+ },
+ {
+  "date": "2026-09-30",
+  "hour": 20,
+  "room": "duza",
+  "who": "Dobrem Zwyciężaj"
+ },
+ {
+  "date": "2026-09-21",
+  "hour": 21,
+  "room": "duza",
+  "who": "Przymierze Miłosierdzia"
+ },
+ {
+  "date": "2026-10-16",
+  "hour": 16,
+  "room": "duza",
+  "who": "Bierzmowani klasa 8"
+ },
+ {
+  "date": "2026-10-16",
+  "hour": 17,
+  "room": "duza",
+  "who": "Bierzmowani klasa 8"
+ },
+ {
+  "date": "2026-10-15",
+  "hour": 18,
+  "room": "biblioteka",
+  "who": "Akcja Katolicka"
+ },
+ {
+  "date": "2026-10-12",
+  "hour": 18,
+  "room": "duza",
+  "who": "Bierzmowani klasa 8"
+ },
+ {
+  "date": "2026-10-13",
+  "hour": 18,
+  "room": "duza",
+  "who": "Bierzmowani klasa 8"
+ },
+ {
+  "date": "2026-10-14",
+  "hour": 18,
+  "room": "duza",
+  "who": "Bierzmowani klasa 8"
+ },
+ {
+  "date": "2026-10-16",
+  "hour": 18,
+  "room": "duza",
+  "who": "Magnificat"
+ },
+ {
+  "date": "2026-10-20",
+  "hour": 18,
+  "room": "duza",
+  "who": "Bierzmowani klasa 7"
+ },
+ {
+  "date": "2026-10-08",
+  "hour": 19,
+  "room": "biblioteka",
+  "who": "Katecheza przed chrztem"
+ },
+ {
+  "date": "2026-10-15",
+  "hour": 19,
+  "room": "biblioteka",
+  "who": "Akcja Katolicka"
+ },
+ {
+  "date": "2026-10-21",
+  "hour": 19,
+  "room": "biblioteka",
+  "who": "Katecheza przed chrztem"
+ },
+ {
+  "date": "2026-10-08",
+  "hour": 19,
+  "room": "duza",
+  "who": "Przymierze Miłosierdzia"
+ },
+ {
+  "date": "2026-10-12",
+  "hour": 19,
+  "room": "duza",
+  "who": "Przymierze Miłosierdzia"
+ },
+ {
+  "date": "2026-10-16",
+  "hour": 19,
+  "room": "duza",
+  "who": "Magnificat"
+ },
+ {
+  "date": "2026-10-19",
+  "hour": 19,
+  "room": "duza",
+  "who": "Przymierze Miłosierdzia"
+ },
+ {
+  "date": "2026-10-26",
+  "hour": 19,
+  "room": "duza",
+  "who": "Przymierze Miłosierdzia"
+ },
+ {
+  "date": "2026-10-15",
+  "hour": 20,
+  "room": "biblioteka",
+  "who": "Akcja Katolicka"
+ },
+ {
+  "date": "2026-10-08",
+  "hour": 20,
+  "room": "duza",
+  "who": "Przymierze Miłosierdzia"
+ },
+ {
+  "date": "2026-10-12",
+  "hour": 20,
+  "room": "duza",
+  "who": "Przymierze Miłosierdzia"
+ },
+ {
+  "date": "2026-10-19",
+  "hour": 20,
+  "room": "duza",
+  "who": "Przymierze Miłosierdzia"
+ },
+ {
+  "date": "2026-10-26",
+  "hour": 20,
+  "room": "duza",
+  "who": "Przymierze Miłosierdzia"
+ },
+ {
+  "date": "2026-10-08",
+  "hour": 21,
+  "room": "duza",
+  "who": "Przymierze Miłosierdzia"
+ },
+ {
+  "date": "2026-10-12",
+  "hour": 21,
+  "room": "duza",
+  "who": "Przymierze Miłosierdzia"
+ },
+ {
+  "date": "2026-10-19",
+  "hour": 21,
+  "room": "duza",
+  "who": "Przymierze Miłosierdzia"
+ },
+ {
+  "date": "2026-10-26",
+  "hour": 21,
+  "room": "duza",
+  "who": "Przymierze Miłosierdzia"
+ },
+ {
+  "date": "2026-11-18",
+  "hour": 17,
+  "room": "biblioteka",
+  "who": "Bierzmowani klasa 7"
+ },
+ {
+  "date": "2026-11-12",
+  "hour": 18,
+  "room": "biblioteka",
+  "who": "Akcja Katolicka"
+ },
+ {
+  "date": "2026-11-18",
+  "hour": 18,
+  "room": "biblioteka",
+  "who": "Bierzmowani klasa 8"
+ },
+ {
+  "date": "2026-11-09",
+  "hour": 18,
+  "room": "duza",
+  "who": "Bierzmowani klasa 8"
+ },
+ {
+  "date": "2026-11-23",
+  "hour": 18,
+  "room": "duza",
+  "who": "Bierzmowani klasa 7"
+ },
+ {
+  "date": "2026-11-12",
+  "hour": 19,
+  "room": "biblioteka",
+  "who": "Akcja Katolicka"
+ },
+ {
+  "date": "2026-11-12",
+  "hour": 20,
+  "room": "biblioteka",
+  "who": "Akcja Katolicka"
+ },
+ {
+  "date": "2026-12-10",
+  "hour": 18,
+  "room": "biblioteka",
+  "who": "Akcja Katolicka"
+ },
+ {
+  "date": "2026-12-14",
+  "hour": 18,
+  "room": "duza",
+  "who": "Bierzmowani klasa 8"
+ },
+ {
+  "date": "2026-12-10",
+  "hour": 19,
+  "room": "biblioteka",
+  "who": "Akcja Katolicka"
+ },
+ {
+  "date": "2026-12-14",
+  "hour": 19,
+  "room": "duza",
+  "who": "Bierzmowani klasa 7"
+ },
+ {
+  "date": "2026-12-10",
+  "hour": 20,
+  "room": "biblioteka",
+  "who": "Akcja Katolicka"
+ }
+]
