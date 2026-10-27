@@ -2,11 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, ChevronDown } from "lucide-react";
 
+import { ParishTitle } from "@/components/home/parish-title";
 import { Reveal } from "@/components/reveal";
-import { NextMassCard } from "@/components/today-bar";
 import { churches, imageHistory } from "@/lib/history";
 import { shortcuts } from "@/lib/home";
-import { site } from "@/lib/site";
+
 
 const [fara, swietyKrzyz] = churches;
 const milestones = imageHistory.flatMap((era) => era.events).filter((e) => e.major);
@@ -18,26 +18,23 @@ export function HomeSg4() {
       {/* I. Ołtarz */}
       <section className="relative flex min-h-[calc(100svh-7.25rem)] flex-col overflow-hidden bg-lapis-deep">
         <div className="absolute inset-0" aria-hidden>
-          <Image src="/images/fara-oltarz.jpg" alt="" fill priority sizes="100vw" className="hero-zoom object-cover object-[51%_45%]" />
+          <Image src="/images/fara-oltarz-ostre.jpg" alt="" fill priority quality={92} sizes="100vw" className="object-cover object-[51%_45%]" />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-lapis-deep/70 via-lapis-deep/45 to-lapis-deep" />
+        {/* Lekkie przyciemnienie tylko u góry i na dole — środek zdjęcia zostaje wyraźny */}
+        <div className="absolute inset-0 bg-gradient-to-b from-lapis-deep/55 via-transparent via-40% to-lapis-deep" />
 
-        <div className="relative flex flex-1 flex-col items-center justify-center px-5 py-16 text-center">
+        <div className="relative mx-auto flex w-full max-w-7xl flex-1 flex-col items-center justify-end px-5 pb-8 pt-[38svh] text-center lg:items-start lg:justify-center lg:pt-16 lg:text-left xl:px-8">
+          {/* Parafia i sanktuarium na granatowej tablicy — czytelne na każdym fragmencie zdjęcia */}
           <Reveal>
-            <p className="text-[0.75rem] font-bold uppercase tracking-[0.32em] text-gold-light">Archidiecezja Poznańska · Buk</p>
+            <div className="mx-auto max-w-4xl rounded-3xl border border-gold/40 bg-lapis-deep/85 px-6 py-7 lg:mx-0 lg:max-w-[28rem] shadow-[0_30px_80px_-30px_rgba(8,15,35,0.9)] backdrop-blur-sm sm:px-10 sm:py-8">
+              <div className="lg:hidden"><ParishTitle tone="dark" align="center" size="md" /></div>
+              <div className="hidden lg:block"><ParishTitle tone="dark" size="md" /></div>
+              <p className="mx-auto mt-4 max-w-xl text-base leading-7 text-gold-pale/80 lg:mx-0">
+                Od blisko sześciu wieków przychodzimy tu do Tej, która wskazuje drogę do Syna.
+              </p>
+            </div>
           </Reveal>
-          <Reveal delay={200}>
-            <h1 className="mt-6 font-display text-6xl font-semibold leading-[0.95] text-gold-pale [text-shadow:0_2px_30px_rgba(16,29,59,0.8)] sm:text-8xl">
-              Pani <span className="gold-text italic [text-shadow:none]">Bukowska</span>
-            </h1>
-          </Reveal>
-          <Reveal delay={400}>
-            <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-gold-pale/85">
-              Sanktuarium Matki Bożej Bukowskiej Literackiej. Od blisko sześciu wieków przychodzimy tu do Tej, która
-              wskazuje drogę do Syna.
-            </p>
-          </Reveal>
-          <a href="#obraz" className="mt-12 flex flex-col items-center gap-2 text-xs uppercase tracking-[0.25em] text-gold-light/80 hover:text-gold-pale">
+          <a href="#obraz" className="mt-6 flex flex-col items-center gap-2 lg:hidden text-xs uppercase tracking-[0.25em] text-gold-pale [text-shadow:0_1px_8px_rgba(8,15,35,0.9)] hover:text-white">
             Wejdź
             <ChevronDown className="animate-bounce motion-reduce:animate-none" size={22} />
           </a>
@@ -45,11 +42,8 @@ export function HomeSg4() {
 
         {/* Najważniejsze od razu, na dole pierwszego ekranu */}
         <div className="relative border-t border-gold/25 bg-lapis-deep/70 backdrop-blur">
-          <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-6 px-5 py-5 lg:px-8">
-            <div className="[&_p:nth-child(2)]:text-4xl">
-              <NextMassCard />
-            </div>
-            <div className="flex flex-wrap gap-2">
+          <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-6 px-5 py-5 lg:px-8">
+            <div className="flex flex-wrap justify-center gap-2">
               {shortcuts.slice(0, 4).map(({ title, href, external }) =>
                 external ? (
                   <a key={title} href={href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 rounded-full border border-gold-light/40 px-5 py-2.5 text-sm font-semibold text-gold-pale hover:bg-gold-light/10">
@@ -81,7 +75,7 @@ export function HomeSg4() {
               katastrofy fary w 1806 roku, spłonął w styczniu 1945 i odrodził się w obrazie Eugenii Gogolewskiej,
               ukoronowanym 10 września 2017 roku.
             </p>
-            <Link href="/sanktuarium/historia-obrazu" className="mt-8 inline-flex items-center gap-2 rounded-full bg-lapis px-7 py-3.5 text-sm font-bold text-gold-pale hover:bg-lapis-light">
+            <Link href="/sanktuarium#historia" className="mt-8 inline-flex items-center gap-2 rounded-full bg-lapis px-7 py-3.5 text-sm font-bold text-gold-pale hover:bg-lapis-light">
               Cała historia obrazu <ArrowRight size={16} />
             </Link>
           </Reveal>
@@ -122,24 +116,6 @@ export function HomeSg4() {
         </ol>
       </section>
 
-      {/* VI. Zakończenie */}
-      <section className="mx-auto max-w-4xl px-5 py-24 text-center">
-        <Reveal>
-          <Image src="/logo/logo-lapis.png" alt="" width={144} height={144} className="mx-auto h-36 w-36" />
-          <h2 className="mt-8 font-display text-5xl font-semibold leading-tight text-lapis">Powierz Jej swoje sprawy</h2>
-          <p className="mx-auto mt-4 max-w-lg text-lg text-ink-soft">
-            Prośby i podziękowania odczytujemy w każdy czwartek przed wieczorną Mszą Świętą.
-          </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <a href={site.links.petitions} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-lapis px-7 py-3.5 text-sm font-bold text-gold-pale hover:bg-lapis-light">
-              Napisz intencję <ArrowUpRight size={16} />
-            </a>
-            <a href={site.links.adoration} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-lapis/30 px-7 py-3.5 text-sm font-semibold text-lapis hover:bg-parchment-deep">
-              Zapisz się na adorację <ArrowUpRight size={16} />
-            </a>
-          </div>
-        </Reveal>
-      </section>
     </>
   );
 }

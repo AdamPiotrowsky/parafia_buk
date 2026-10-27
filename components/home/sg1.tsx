@@ -5,7 +5,7 @@ import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { AmbientVideo } from "@/components/ambient-video";
 import { Divider, Eyebrow } from "@/components/ornament";
 import { SacredImage } from "@/components/sacred-image";
-import { NextMassCard, SaintOfDayCard } from "@/components/today-bar";
+import { SaintOfDayCard } from "@/components/today-bar";
 import { churches } from "@/lib/history";
 import { keyYears, shortcuts } from "@/lib/home";
 import { massSchedule, site } from "@/lib/site";
@@ -43,7 +43,6 @@ export function HomeSg1() {
             </p>
 
             <div className="mt-10 flex flex-wrap items-end gap-x-12 gap-y-8">
-              <NextMassCard />
               <div className="flex flex-wrap gap-3">
                 <Link
                   href="/ogloszenia"
@@ -111,7 +110,6 @@ export function HomeSg1() {
                   <span key={t} className="rounded-full bg-lapis px-3.5 py-1.5 font-semibold tabular-nums text-gold-pale">{t}</span>
                 ))}
               </p>
-              <p className="mt-3 text-xs text-ink-muted">W lipcu i sierpniu bez Mszy o 12:00.</p>
             </div>
             <div>
               <p className="font-display text-2xl font-semibold text-lapis">Dni powszednie</p>
@@ -119,9 +117,6 @@ export function HomeSg1() {
                 {massSchedule.weekday.map((t) => (
                   <span key={t} className="rounded-full border border-lapis/30 px-3.5 py-1.5 font-semibold tabular-nums text-lapis">{t}</span>
                 ))}
-              </p>
-              <p className="mt-3 text-xs text-ink-muted">
-                Święta w dni pracy: {massSchedule.holyDayOnWorkday.join(", ")}
               </p>
             </div>
           </div>
@@ -177,7 +172,7 @@ export function HomeSg1() {
 
           <div className="mt-10 flex justify-center">
             <Link
-              href="/sanktuarium/historia-obrazu"
+              href="/sanktuarium#historia"
               className="group inline-flex items-center gap-2 rounded-full bg-lapis px-7 py-3.5 text-sm font-bold text-gold-pale transition hover:bg-lapis-light"
             >
               Poznaj całą historię
@@ -251,26 +246,6 @@ export function HomeSg1() {
         </div>
       </section>
 
-      {/* PROŚBY */}
-      <section className="mx-auto max-w-7xl px-5 pb-24 lg:px-8">
-        <div className="lapis-sky relative overflow-hidden rounded-3xl px-8 py-14 text-center sm:px-16">
-          <Image src="/logo/logo-gold.png" alt="" width={112} height={112} className="mx-auto h-28 w-28" />
-          <h2 className="mx-auto mt-6 max-w-2xl font-display text-4xl font-semibold leading-tight text-gold-pale sm:text-5xl">
-            Złóż prośbę lub podziękowanie Matce Bożej
-          </h2>
-          <p className="mx-auto mt-4 max-w-xl text-gold-pale/70">
-            Intencje odczytujemy w każdy czwartek przed wieczorną Mszą Świętą.
-          </p>
-          <a
-            href={site.links.petitions}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-8 inline-flex items-center gap-2 rounded-full bg-gold-light px-7 py-3.5 text-sm font-bold text-lapis-deep transition hover:bg-gold-pale"
-          >
-            Napisz intencję <ArrowUpRight size={16} />
-          </a>
-        </div>
-      </section>
     </>
   );
 }

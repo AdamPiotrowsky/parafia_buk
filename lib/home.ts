@@ -1,12 +1,12 @@
 import {
   CalendarDays,
-  Clock,
   Flame,
-  HandHeart,
+  HeartHandshake,
   Megaphone,
   Phone,
   Radio,
   ScrollText,
+  Sparkles,
   type LucideIcon,
 } from "lucide-react";
 
@@ -24,10 +24,10 @@ export type Shortcut = {
 export const shortcuts: Shortcut[] = [
   { title: "Ogłoszenia", hint: "Na ten tydzień", href: "/ogloszenia", icon: Megaphone },
   { title: "Intencje", hint: "Msze w intencjach", href: "/intencje", icon: ScrollText },
-  { title: "Msze i sakramenty", hint: "Porządek Mszy, sakramenty", href: "/msze", icon: Clock },
+  { title: "Święci", hint: "Patroni i święci naszej parafii", href: "/swieci", icon: Sparkles },
   { title: "Transmisja", hint: "Na żywo z fary", href: site.links.live, icon: Radio, external: true },
-  { title: "Prośby i podziękowania", hint: "Do Matki Bożej", href: site.links.petitions, icon: HandHeart, external: true },
-  { title: "Adoracja", hint: "Zapisz się na godzinę", href: site.links.adoration, icon: Flame, external: true },
+  { title: "Spowiedź święta", hint: "Sakrament pojednania", href: "/sakramenty#pojednanie", icon: HeartHandshake },
+  { title: "Bierzmowanie", hint: "Dla kandydatów i rodziców", href: "/bierzmowanie", icon: Flame },
   { title: "Biuro parafialne", hint: "Godziny i kontakt", href: "/kontakt", icon: Phone },
   { title: "Grafik salek", hint: "Dla wspólnot", href: "/parafia/grafik-salek", icon: CalendarDays },
 ];
@@ -50,18 +50,11 @@ export const variants = [
     text: "Ołtarz fary w tle z powolnym przybliżaniem, panel „na skróty”, historia obrazu i przelot drona nad farą.",
   },
   {
-    id: 2,
-    href: "/sg2",
-    image: "/images/obraz-mbbl.jpg",
-    name: "Tryptyk",
-    text: "Jak ołtarz skrzydłowy: po lewej wysuwa się obraz Matki Bożej, po prawej kościół — w środku najważniejsze informacje.",
-  },
-  {
     id: 4,
     href: "/sg4",
     image: "/images/swiety-krzyz-zewnatrz.jpg",
     name: "Opowieść",
-    text: "Pełnoekranowe zdjęcia przewijane jak album — od ołtarza, przez obraz, po oba kościoły i ich historię.",
+    text: "Wyraźny ołtarz z granatową tablicą parafii i sanktuarium, dalej zdjęcia przewijane jak album — obraz, oba kościoły i ich historia.",
   },
   {
     id: 5,
@@ -71,10 +64,17 @@ export const variants = [
     text: "Jasna, biała strona — ołtarz fary w dużym łukowym oknie jak w prezbiterium, pod nim najbliższa Msza i święty dnia.",
   },
   {
-    id: 6,
-    href: "/sg6",
-    image: "/images/fara-front.jpg",
-    name: "Nawa",
-    text: "Po lewej ołtarz na całą wysokość, po prawej biała kolumna z wysuwanymi panelami: obraz, fara, kościół św. Krzyża i Msze.",
+    id: 7,
+    href: "/sg7",
+    image: "/images/fara-oltarz.jpg",
+    name: "Biel i granat",
+    text: "Nazwy parafii i sanktuarium na granatowym niebie, pod nimi wyraźny ołtarz w łukowym oknie przechodzący na białe tło.",
+  },
+  {
+    id: 9,
+    href: "/sg9",
+    image: "/images/fara-oltarz.jpg",
+    name: "Tablica",
+    text: "Ołtarz na całą szerokość przechodzący w granat, a na nim granatowa tablica: parafia, sanktuarium i najbliższa Msza.",
   },
 ];

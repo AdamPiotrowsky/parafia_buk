@@ -170,6 +170,11 @@ export const saintsCalendar: Record<string, CalendarEntry> = {
   "11-24": { name: "Świętych Andrzeja Dung-Lac i Towarzyszy", rank: "wspomnienie" },
   "11-30": { name: "Św. Andrzeja Apostoła", rank: "święto" },
 
+  "12-02": {
+    name: "Bł. Rafała Chylińskiego, prezbitera",
+    rank: "wspomnienie dowolne",
+    local: "Franciszkanin urodzony w Wysoczce w naszej parafii.",
+  },
   "12-03": { name: "Św. Franciszka Ksawerego", rank: "wspomnienie" },
   "12-04": { name: "Św. Barbary", rank: "wspomnienie" },
   "12-06": { name: "Św. Mikołaja", rank: "wspomnienie dowolne" },
@@ -275,6 +280,7 @@ export const monthNames = [
 
 /* Patroni i święci szczególnie związani z Bukiem */
 export type Patron = {
+  href?: string;
   name: string;
   feast: string;
   role: string;
@@ -314,5 +320,14 @@ export const patrons: Patron[] = [
     attribute: "Krzyż i figura „Ecce Homo” (1762)",
     text:
       "Drewniany kościół na planie krzyża greckiego, ufundowany przez Wiktora Raczyńskiego. Tu w 1806 roku przeniesiono cudowny obraz, gdy wieża fary runęła.",
+  },
+  {
+    name: "Bł. Rafał Chyliński",
+    feast: "2 grudnia",
+    role: "Błogosławiony z naszej parafii",
+    attribute: "Habit franciszkański i chleb dla ubogich",
+    href: "/swieci/rafal-chylinski",
+    text:
+      "Franciszkanin urodzony w 1694 roku w Wysoczce koło Buku, nazywany „ojcem biedaków”. Opiekował się chorymi w czasie zarazy w Krakowie, zmarł w Łagiewnikach. Beatyfikowany przez Jana Pawła II 9 czerwca 1991 roku.",
   },
 ];

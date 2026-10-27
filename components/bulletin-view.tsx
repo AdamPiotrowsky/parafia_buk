@@ -40,6 +40,7 @@ function PrintHint() {
     <div className="rounded-2xl border border-line p-6 text-sm leading-6 text-ink-muted">
       Treść publikowana jest co tydzień. Pytania? Zadzwoń do biura parafialnego: <br />
       <a href="tel:618140141" className="font-semibold text-lapis">61 8140 141</a>
+      <span className="mt-1 block text-xs">w godzinach pracy biura: wt., czw., pt., sob. 9:00–11:00 · śr. 16:00–18:00</span>
     </div>
   );
 }

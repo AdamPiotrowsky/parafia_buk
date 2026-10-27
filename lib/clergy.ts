@@ -32,8 +32,8 @@ export const pastors: Pastor[] = [
   { years: "1945 – 1958", name: "ks. Antoni Chilomer", note: "† 21.07.1958" },
   { years: "1958 – 1982", name: "ks. inf. Teofil Ratajczak", note: "† 15.09.2004" },
   { years: "1982 – 1989", name: "ks. dr Zygmunt Jonaczyk", note: "† 1.11.1999" },
-  { years: "1989 – 1997", name: "ks. Jan Majchrzak", note: "† 18.06.2025" },
-  { years: "1997 – 2025", name: "ks. Andrzej Szczepaniak", note: "sanktuarium (2015) i koronacja obrazu (2017)" },
+  { years: "1989 – 1997", name: "ks. prał. Jan Majchrzak", note: "† 18.06.2025" },
+  { years: "1997 – 2025", name: "ks. prał. Andrzej Szczepaniak", note: "sanktuarium (2015) i koronacja obrazu (2017)" },
   { years: "od 2025", name: "ks. Paweł Froelich" },
 ];
 

@@ -3,7 +3,9 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
-import { formatPolishDate, nextMass, saintOfDay, warsawNow, type WarsawNow } from "@/lib/liturgy";
+import { href, type Locale } from "@/lib/i18n/config";
+import { ui } from "@/lib/i18n/ui";
+import { formatPolishDate, saintOfDay, warsawNow, type WarsawNow } from "@/lib/liturgy";
 
 /* Liczone w przeglądarce, żeby zawsze pokazywać bieżący dzień i godzinę */
 function useWarsawNow() {
@@ -17,24 +19,24 @@ function useWarsawNow() {
   return now;
 }
 
-function inWords(minutes: number) {
-  if (minutes < 60) return `za ${minutes} min`;
-  const h = Math.floor(minutes / 60);
-  const m = minutes % 60;
-  return m ? `za ${h} godz. ${m} min` : `za ${h} godz.`;
+
+/* Data w języku strony — w innych językach bez polskiego patrona dnia */
+function formatDate(now: WarsawNow, lang: Locale) {
+  if (lang === "pl") return formatPolishDate(now);
+  return new Intl.DateTimeFormat(lang, { weekday: "long", day: "numeric", month: "long", timeZone: "UTC" }).format(
+    new Date(Date.UTC(now.year, now.month - 1, now.day)),
+  );
 }
 
-export function TodayBar() {
+export function TodayBar({ lang = "pl" }: { lang?: Locale }) {
   const now = useWarsawNow();
   if (!now) return <div className="h-9" />;
 
-  const saint = saintOfDay(now.year, now.month, now.day);
-  const mass = nextMass(now);
-
+  const saint = lang === "pl" ? saintOfDay(now.year, now.month, now.day) : null;
   return (
     <div className="flex h-9 items-center justify-between gap-6 text-[0.78rem] text-gold-pale/80">
       <p className="truncate">
-        <span className="text-gold-pale">{formatPolishDate(now)}</span>
+        <span className="text-gold-pale first-letter:uppercase">{formatDate(now, lang)}</span>
         {saint && (
           <>
             <span className="mx-2 text-gold/60">✦</span>
@@ -44,33 +46,14 @@ export function TodayBar() {
           </>
         )}
       </p>
-      <Link href="/msze" className="hidden shrink-0 items-center gap-2 hover:text-gold-pale sm:flex">
+      <Link href={href("/msze", lang)} className="hidden shrink-0 items-center gap-2 hover:text-gold-pale sm:flex">
         <span className="h-1.5 w-1.5 rounded-full bg-gold-light" />
-        Najbliższa Msza: <strong className="font-semibold text-gold-pale">{mass.when} {mass.time}</strong>
+        {ui[lang].massTimes}
       </Link>
     </div>
   );
 }
 
-export function NextMassCard({ tone = "dark" }: { tone?: "dark" | "light" }) {
-  const now = useWarsawNow();
-  const mass = now ? nextMass(now) : null;
-  const light = tone === "light";
-
-  return (
-    <div>
-      <p className={`text-[0.7rem] font-bold uppercase tracking-[0.25em] ${light ? "text-gold" : "text-gold-light"}`}>
-        Najbliższa Msza Święta
-      </p>
-      <p className={`mt-2 font-display text-6xl font-semibold leading-none tabular-nums ${light ? "text-lapis" : "text-gold-pale"}`}>
-        {mass ? mass.time : "—"}
-      </p>
-      <p className={`mt-2 text-sm ${light ? "text-ink-muted" : "text-gold-pale/70"}`}>
-        {mass ? `${mass.when} · ${inWords(mass.inMinutes)}` : " "}
-      </p>
-    </div>
-  );
-}
 
 export function SaintOfDayCard() {
   const now = useWarsawNow();

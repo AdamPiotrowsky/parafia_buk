@@ -1,5 +1,7 @@
 export const site = {
-  name: "Sanktuarium w Buku",
+  name: "Parafia św. Stanisława w Buku",
+  /* Pierwsza, najważniejsza nazwa — potem sanktuarium */
+  parishShort: "Parafia św. Stanisława w Buku",
   fullName: "Sanktuarium Matki Bożej Bukowskiej Literackiej",
   parish: "Parafia pw. św. Stanisława Biskupa i Męczennika w Buku",
   diocese: "Archidiecezja Poznańska",
@@ -12,6 +14,9 @@ export const site = {
   email: "parbuk@archpoznan.pl",
   bankAccount: "67 9048 0007 0025 4298 2000 0001",
 
+  /* Krótko — przy każdym numerze telefonu do biura */
+  officeHoursShort: "wt., czw., pt., sob. 9:00–11:00 · śr. 16:00–18:00",
+
   officeHours: [
     { days: "wtorek, czwartek, piątek, sobota", hours: "9:00 – 11:00" },
     { days: "środa", hours: "16:00 – 18:00" },
@@ -19,6 +24,7 @@ export const site = {
 
   links: {
     live: "https://www.youtube.com/@SanktuariumParafiaBuk/streams",
+    facebook: "https://www.facebook.com/Parafiabuk",
     petitions:
       "https://docs.google.com/forms/d/e/1FAIpQLSeBMEkxy6iR5xzZSCaboyYwRQq-vYnhUxqbk5JS0m6LXelkKA/viewform",
     adoration:
@@ -33,9 +39,10 @@ export type NavLink = { label: string; href: string };
 export type NavItem = NavLink & { children?: NavLink[] };
 
 export const mainNav: NavItem[] = [
-  { label: "Msze i sakramenty", href: "/msze" },
-  { label: "Ogłoszenia", href: "/ogloszenia" },
   { label: "Aktualności", href: "/aktualnosci" },
+  { label: "Ogłoszenia", href: "/ogloszenia" },
+  { label: "Intencje", href: "/intencje" },
+  { label: "Sakramenty", href: "/sakramenty" },
   { label: "Galeria", href: "/galeria" },
   {
     label: "Parafia",
@@ -47,9 +54,7 @@ export const mainNav: NavItem[] = [
       { label: "Wspólnoty", href: "/parafia/wspolnoty" },
       { label: "Święci", href: "/swieci" },
       { label: "Ochrona dzieci", href: "/parafia/ochrona-dzieci" },
-      { label: "Gazetka parafialna", href: "/gazetka" },
       { label: "Grafik salek", href: "/parafia/grafik-salek" },
-      { label: "Życie parafii", href: "/parafia" },
     ],
   },
   { label: "Kontakt", href: "/kontakt" },

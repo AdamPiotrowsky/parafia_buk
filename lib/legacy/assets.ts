@@ -10,7 +10,8 @@ const LEGACY_ORIGIN = "https://sanktuarium-buk.pl";
 const hasLocalUploads = fs.existsSync(path.join(process.cwd(), "public", "uploads"));
 
 export function legacyUrl(p: string) {
-  return hasLocalUploads ? p : `${LEGACY_ORIGIN}${p}`;
+  // encodeURI — niektóre nazwy plików mają polskie litery
+  return hasLocalUploads ? encodeURI(p) : `${LEGACY_ORIGIN}${encodeURI(p)}`;
 }
 
 export function legacyHtml(html: string) {

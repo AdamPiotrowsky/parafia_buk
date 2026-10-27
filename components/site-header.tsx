@@ -4,10 +4,14 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ChevronDown, Clock, Megaphone, Menu, Radio, ScrollText, X } from "lucide-react";
+import { Church, ChevronDown, Clock, Mail, Megaphone, Menu, Radio, ScrollText, X } from "lucide-react";
 
+import { FacebookIcon } from "@/components/icons";
+import { LanguageSwitcher } from "@/components/language-switcher";
 import { TodayBar } from "@/components/today-bar";
-import { mainNav, site, type NavItem } from "@/lib/site";
+import { href, type Locale } from "@/lib/i18n/config";
+import { ui, type DockItem } from "@/lib/i18n/ui";
+import { site, type NavItem } from "@/lib/site";
 
 function isActive(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(`${href}/`);
@@ -37,9 +41,10 @@ const pill = (active: boolean) =>
     active ? "bg-lapis text-gold-pale" : "text-ink-soft hover:bg-parchment-deep hover:text-lapis"
   }`;
 
-export function SiteHeader() {
+export function SiteHeader({ lang = "pl" }: { lang?: Locale }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const t = ui[lang];
 
   return (
     <>
@@ -52,33 +57,46 @@ export function SiteHeader() {
               rel="noopener noreferrer"
               className="hidden shrink-0 items-center gap-2 border-r border-gold/25 pr-6 text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-gold-light hover:text-gold-pale md:flex"
             >
-              <span aria-hidden>✠</span> Archidiecezja Poznańska
+              <span aria-hidden>✠</span> {t.diocese}
             </a>
             <div className="min-w-0 flex-1">
-              <TodayBar />
+              <TodayBar lang={lang} />
+            </div>
+            <div className="flex shrink-0 items-center gap-3 border-l border-gold/25 pl-3 sm:gap-4 sm:pl-5">
+              <a
+                href={site.links.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={t.facebook}
+                title={t.facebook}
+                className="flex h-6 w-6 items-center justify-center rounded-full bg-gold-light/15 text-gold-pale transition hover:bg-[#1877f2] hover:text-white"
+              >
+                <FacebookIcon size={14} />
+              </a>
+              <LanguageSwitcher lang={lang} label={t.languageLabel} />
             </div>
           </div>
         </div>
 
         <div className="border-b border-line bg-parchment/95 backdrop-blur">
           <div className="mx-auto flex h-[4.5rem] max-w-7xl items-center justify-between gap-6 px-5 lg:px-8">
-            <Link href="/" className="group flex items-center gap-3">
+            <Link href={href("", lang)} className="group flex items-center gap-3">
               <span className="flex h-12 w-12 items-center justify-center rounded-full bg-lapis ring-1 ring-gold/50 transition group-hover:ring-gold">
                 <Image src="/logo/postac-gold.png" alt="" width={40} height={40} className="h-10 w-10" priority />
               </span>
               <span className="leading-tight">
-                <span className="block font-display text-[1.35rem] font-semibold text-lapis">Sanktuarium w Buku</span>
+                <span className="block font-display text-[1.2rem] font-semibold leading-tight text-lapis sm:text-[1.35rem]">{t.parishShort}</span>
                 <span className="block text-[0.68rem] uppercase tracking-[0.2em] text-ink-muted">
-                  Matki Bożej Bukowskiej Literackiej
+                  {t.sanctuary}
                 </span>
                 <span className="block text-[0.62rem] font-semibold uppercase tracking-[0.2em] text-gold md:hidden">
-                  Archidiecezja Poznańska
+                  {t.diocese}
                 </span>
               </span>
             </Link>
 
-            <nav className="hidden items-center gap-1 lg:flex" aria-label="Główna nawigacja">
-              {mainNav.map((item) =>
+            <nav className="hidden items-center gap-1 xl:flex" aria-label={t.mainNavLabel}>
+              {t.nav.map((item) =>
                 item.children ? (
                   <NavDropdown key={item.href} item={item} pathname={pathname} />
                 ) : (
@@ -100,14 +118,14 @@ export function SiteHeader() {
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-60" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-red-600" />
                 </span>
-                Na żywo
+                {t.live}
               </a>
 
               <button
                 type="button"
                 onClick={() => setOpen((v) => !v)}
-                className="flex h-11 w-11 items-center justify-center rounded-full text-lapis hover:bg-parchment-deep lg:hidden"
-                aria-label={open ? "Zamknij menu" : "Otwórz menu"}
+                className="flex h-11 w-11 items-center justify-center rounded-full text-lapis hover:bg-parchment-deep xl:hidden"
+                aria-label={open ? t.menuClose : t.menuOpen}
                 aria-expanded={open}
               >
                 {open ? <X size={22} /> : <Menu size={22} />}
@@ -117,9 +135,9 @@ export function SiteHeader() {
         </div>
 
         {open && (
-          <div className="border-b border-line bg-parchment lg:hidden">
-            <nav className="mx-auto max-h-[calc(100svh-8rem)] max-w-7xl overflow-y-auto px-5 py-4" aria-label="Menu mobilne">
-              {mainNav.map((item) =>
+          <div className="border-b border-line bg-parchment xl:hidden">
+            <nav className="mx-auto max-h-[calc(100svh-8rem)] max-w-7xl overflow-y-auto px-5 py-4" aria-label={t.mobileNavLabel}>
+              {t.nav.map((item) =>
                 item.children ? (
                   <div key={item.href} className="my-2 border-y border-line py-2">
                     <p className="px-4 pb-1 pt-2 text-[0.7rem] font-bold uppercase tracking-[0.25em] text-gold">{item.label}</p>
@@ -157,7 +175,7 @@ export function SiteHeader() {
         )}
       </header>
 
-      <MobileDock pathname={pathname} />
+      <MobileDock pathname={pathname} items={t.dock} live={t.live} label={t.quickNavLabel} />
     </>
   );
 }
@@ -224,20 +242,18 @@ function NavDropdown({ item, pathname }: { item: NavItem; pathname: string }) {
 }
 
 /* Dolny pasek na telefonie — najczęściej używane rzeczy pod kciukiem */
-function MobileDock({ pathname }: { pathname: string }) {
-  const items = [
-    { label: "Msze", href: "/msze", icon: Clock },
-    { label: "Ogłoszenia", href: "/ogloszenia", icon: Megaphone },
-    { label: "Intencje", href: "/intencje", icon: ScrollText },
-  ];
+const dockIcons = { mass: Clock, news: Megaphone, intentions: ScrollText, church: Church, contact: Mail };
 
+function MobileDock({ pathname, items, live, label }: { pathname: string; items: DockItem[]; live: string; label: string }) {
   return (
     <nav
       className="fixed inset-x-0 bottom-0 z-50 border-t border-gold/30 bg-lapis-deep/95 pb-[env(safe-area-inset-bottom)] backdrop-blur sm:hidden"
-      aria-label="Szybki dostęp"
+      aria-label={label}
     >
       <div className="grid grid-cols-4">
-        {items.map(({ label, href, icon: Icon }) => (
+        {items.map(({ label, href, icon }) => {
+          const Icon = dockIcons[icon];
+          return (
           <Link
             key={href}
             href={href}
@@ -248,7 +264,8 @@ function MobileDock({ pathname }: { pathname: string }) {
             <Icon size={20} strokeWidth={1.6} />
             {label}
           </Link>
-        ))}
+          );
+        })}
         <a
           href={site.links.live}
           target="_blank"
@@ -256,7 +273,7 @@ function MobileDock({ pathname }: { pathname: string }) {
           className="flex flex-col items-center gap-1 py-2.5 text-[0.68rem] font-medium text-gold-pale/70"
         >
           <Radio size={20} strokeWidth={1.6} className="text-red-400" />
-          Na żywo
+          {live}
         </a>
       </div>
     </nav>

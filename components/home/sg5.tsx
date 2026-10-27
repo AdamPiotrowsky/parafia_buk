@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 
 import { SacredImage } from "@/components/sacred-image";
-import { NextMassCard, SaintOfDayCard } from "@/components/today-bar";
+import { SaintOfDayCard } from "@/components/today-bar";
 import { churches } from "@/lib/history";
 import { keyYears, shortcuts } from "@/lib/home";
 import { massSchedule, site } from "@/lib/site";
@@ -39,10 +39,7 @@ export function HomeSg5() {
           </div>
 
           {/* Jasny pasek informacji, nachodzący na dół okna */}
-          <div className="relative mx-auto -mt-20 grid max-w-4xl gap-px overflow-hidden rounded-2xl border border-line bg-line text-left shadow-[0_30px_60px_-30px_rgba(16,29,59,0.35)] sm:grid-cols-[1fr_1.2fr_auto]">
-            <div className="bg-white p-6 sm:p-7">
-              <NextMassCard tone="light" />
-            </div>
+          <div className="relative mx-auto -mt-20 grid max-w-3xl gap-px overflow-hidden rounded-2xl border border-line bg-line text-left shadow-[0_30px_60px_-30px_rgba(16,29,59,0.35)] sm:grid-cols-[1fr_auto]">
             <div className="bg-white p-6 sm:p-7 [&_p:nth-child(3)]:text-2xl">
               <SaintOfDayCard />
             </div>
@@ -104,7 +101,7 @@ export function HomeSg5() {
                 </li>
               ))}
             </ol>
-            <Link href="/sanktuarium/historia-obrazu" className="mt-8 inline-flex items-center gap-2 text-sm font-bold text-lapis hover:text-gold">
+            <Link href="/sanktuarium#historia" className="mt-8 inline-flex items-center gap-2 text-sm font-bold text-lapis hover:text-gold">
               Cała historia obrazu <ArrowRight size={15} />
             </Link>
           </div>
@@ -126,11 +123,10 @@ export function HomeSg5() {
           ))}
         </div>
 
-        <div className="mt-16 grid gap-6 border-t border-line pt-10 sm:grid-cols-3">
+        <div className="mt-16 grid gap-6 border-t border-line pt-10 sm:grid-cols-2">
           {[
             { name: "Niedziele i święta", times: massSchedule.sunday },
             { name: "Dni powszednie", times: massSchedule.weekday },
-            { name: "Święta w dni pracy", times: massSchedule.holyDayOnWorkday },
           ].map((g) => (
             <div key={g.name}>
               <p className="text-[0.7rem] font-bold uppercase tracking-[0.22em] text-gold">{g.name}</p>

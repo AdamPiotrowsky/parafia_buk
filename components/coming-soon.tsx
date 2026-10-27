@@ -51,6 +51,7 @@ export function ComingSoonPage({
               </Link>
             ))}
           </div>
+          <p className="text-xs text-ink-muted">Telefonicznie w godzinach pracy biura: {site.officeHoursShort}</p>
         </div>
       </section>
     </>

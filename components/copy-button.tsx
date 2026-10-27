@@ -6,10 +6,12 @@ import { Check, Copy } from "lucide-react";
 export function CopyButton({
   value,
   label = "Kopiuj numer konta",
+  copiedLabel = "Skopiowano",
   tone = "dark",
 }: {
   value: string;
   label?: string;
+  copiedLabel?: string;
   tone?: "dark" | "light";
 }) {
   const [copied, setCopied] = useState(false);
@@ -49,7 +51,7 @@ export function CopyButton({
       } ${copied ? (tone === "light" ? "border-emerald-600/40 text-emerald-700" : "") : ""}`}
     >
       {copied ? <Check size={14} /> : <Copy size={14} />}
-      {copied ? "Skopiowano" : label}
+      {copied ? copiedLabel : label}
     </button>
   );
 }
