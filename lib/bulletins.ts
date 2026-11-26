@@ -1,8 +1,8 @@
+import { listBulletins, type BulletinKind } from "@/lib/content-store";
+
 /*
- * Ogłoszenia i intencje.
- *
- * Docelowo treść trafia tu z panelu administracyjnego (import z Worda przez
- * /api/docx/preview → baza). Na razie to PRZYKŁADOWA treść pokazująca wygląd.
+ * Ogłoszenia i intencje na stronie — treść dodawana w panelu (import z Worda).
+ * Dopóki w panelu nic nie ma, pokazujemy PRZYKŁADOWĄ treść poniżej.
  */
 
 export type Bulletin = {
@@ -12,7 +12,20 @@ export type Bulletin = {
   sample?: boolean;
 };
 
-export const currentAnnouncements: Bulletin = {
+export type BulletinArchiveItem = { id: string; title: string; dateLabel: string };
+
+/* Najnowszy wpis albo — z ?wpis=… — wybrany z archiwum; plus lista starszych */
+export async function getBulletinPage(kind: BulletinKind, id?: string) {
+  const all = await listBulletins(kind);
+  const chosen = (id && all.find((b) => b.id === id)) || all[0];
+  const bulletin: Bulletin = chosen ?? (kind === "announcements" ? sampleAnnouncements : sampleIntentions);
+  const archive: BulletinArchiveItem[] = all
+    .slice(0, 9)
+    .map(({ id, title, dateLabel }) => ({ id, title, dateLabel }));
+  return { bulletin, currentId: chosen?.id, latestId: all[0]?.id, archive };
+}
+
+const sampleAnnouncements: Bulletin = {
   title: "XXVIII Niedziela Zwykła",
   dateLabel: "12 października 2026",
   sample: true,
@@ -28,7 +41,7 @@ export const currentAnnouncements: Bulletin = {
 `,
 };
 
-export const currentIntentions: Bulletin = {
+const sampleIntentions: Bulletin = {
   title: "Intencje mszalne",
   dateLabel: "13 – 19 października 2026",
   sample: true,

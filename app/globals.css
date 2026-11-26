@@ -246,6 +246,50 @@ body {
   }
 }
 
+/* Strona główna: tablica z nazwą łagodnie się pojawia, a nazwa sanktuarium „wypisuje” litera po literze */
+.hero-card {
+  animation: hero-card-in 1s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.hero-rule {
+  transform-origin: center;
+  animation: hero-rule-in 0.8s 0.6s ease-out both;
+}
+
+.ink-letter {
+  display: inline-block;
+  animation: ink-in 0.55s ease-out both;
+}
+
+@keyframes hero-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(-0.75rem);
+  }
+}
+
+@keyframes hero-rule-in {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes ink-in {
+  from {
+    opacity: 0;
+    filter: blur(4px);
+    transform: translateY(0.12em);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-card,
+  .hero-rule,
+  .ink-letter {
+    animation: none;
+  }
+}
+
 /* Wpisy przeniesione ze starej strony: obrazy i plakaty w treści */
 .news-content img {
   display: block;

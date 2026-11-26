@@ -61,6 +61,7 @@ export default async function ChurchesPage({ params }: PageProps<"/[lang]/koscio
                   {base.feature.kind === "video" ? (
                     <AmbientVideo
                       src={base.feature.src}
+                      mobileSrc={base.feature.mobileSrc}
                       poster={base.feature.poster ?? base.cover}
                       label={c.caption}
                       className="absolute inset-0 h-full w-full object-cover"

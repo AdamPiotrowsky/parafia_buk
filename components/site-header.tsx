@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -44,6 +44,7 @@ const pill = (active: boolean) =>
 export function SiteHeader({ lang = "pl" }: { lang?: Locale }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const closeMenu = useCallback(() => setOpen(false), []);
   const t = ui[lang];
 
   return (
@@ -134,49 +135,104 @@ export function SiteHeader({ lang = "pl" }: { lang?: Locale }) {
           </div>
         </div>
 
-        {open && (
-          <div className="border-b border-line bg-parchment xl:hidden">
-            <nav className="mx-auto max-h-[calc(100svh-8rem)] max-w-7xl overflow-y-auto px-5 py-4" aria-label={t.mobileNavLabel}>
-              {t.nav.map((item) =>
-                item.children ? (
-                  <div key={item.href} className="my-2 border-y border-line py-2">
-                    <p className="px-4 pb-1 pt-2 text-[0.7rem] font-bold uppercase tracking-[0.25em] text-gold">{item.label}</p>
-                    <div className="grid gap-1 sm:grid-cols-2">
-                      {item.children.map((c) => (
-                        <MenuLink
-                          key={c.href}
-                          href={c.href}
-                          onClick={() => setOpen(false)}
-                          className={`rounded-lg px-4 py-2.5 font-display text-lg ${
-                            isActive(pathname, c.href) ? "bg-lapis text-gold-pale" : "text-lapis hover:bg-parchment-deep"
-                          }`}
-                        >
-                          {c.label}
-                          {isExternal(c.href) && <span className="ml-1 text-gold">↗</span>}
-                        </MenuLink>
-                      ))}
-                    </div>
-                  </div>
-                ) : (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    onClick={() => setOpen(false)}
-                    className={`block rounded-lg px-4 py-3 font-display text-xl ${
-                      isActive(pathname, item.href) ? "bg-lapis text-gold-pale" : "text-lapis hover:bg-parchment-deep"
-                    }`}
-                  >
-                    {item.label}
-                  </Link>
-                )
-              )}
-            </nav>
-          </div>
-        )}
       </header>
 
+      <MobileDrawer open={open} onClose={closeMenu} pathname={pathname} lang={lang} />
       <MobileDock pathname={pathname} items={t.dock} live={t.live} label={t.quickNavLabel} />
     </>
+  );
+}
+
+/*
+ * Menu na telefonie: panel wysuwany z prawej na ~2/3 szerokości.
+ * Kliknięcie w przyciemnione tło, przycisk X albo Esc zamyka; panel przewija się sam, a strona pod nim stoi.
+ * Zajmuje całą wysokość ponad dolnym paskiem, więc nic nie jest zasłonięte.
+ */
+function MobileDrawer({ open, onClose, pathname, lang }: { open: boolean; onClose: () => void; pathname: string; lang: Locale }) {
+  const t = ui[lang];
+  const closeRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const root = document.documentElement;
+    const prev = root.style.overflow;
+    root.style.overflow = "hidden";
+    closeRef.current?.focus();
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    document.addEventListener("keydown", onKey);
+    return () => {
+      root.style.overflow = prev;
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [open, onClose]);
+
+  const linkCls = (active: boolean, size: string) =>
+    `flex items-center justify-between rounded-lg px-3 font-display transition ${size} ${
+      active ? "bg-lapis text-gold-pale" : "text-lapis hover:bg-parchment-deep"
+    }`;
+
+  return (
+    <div className={`fixed inset-0 z-[60] xl:hidden ${open ? "" : "pointer-events-none"}`} aria-hidden={!open}>
+      <div
+        onClick={onClose}
+        className={`absolute inset-0 bg-lapis-deep/55 backdrop-blur-[2px] transition-opacity duration-300 ${open ? "opacity-100" : "opacity-0"}`}
+      />
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-label={t.mobileNavLabel}
+        inert={!open}
+        className={`absolute inset-y-0 right-0 flex w-[68vw] min-w-[15.5rem] max-w-sm flex-col border-l border-gold/30 bg-parchment shadow-[-30px_0_60px_-30px_rgba(8,15,35,0.6)] transition-transform duration-300 ease-out motion-reduce:transition-none ${
+          open ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
+        <div className="flex h-16 shrink-0 items-center justify-between border-b border-line pl-5 pr-2">
+          <span className="text-[0.7rem] font-bold uppercase tracking-[0.25em] text-gold">Menu</span>
+          <button
+            ref={closeRef}
+            type="button"
+            onClick={onClose}
+            aria-label={t.menuClose}
+            className="flex h-11 w-11 items-center justify-center rounded-full text-lapis hover:bg-parchment-deep"
+          >
+            <X size={22} />
+          </button>
+        </div>
+
+        <nav className="flex-1 overflow-y-auto overscroll-contain px-2 py-3" aria-label={t.mobileNavLabel}>
+          {t.nav.map((item) =>
+            item.children ? (
+              <div key={item.href} className="my-2 border-y border-line py-2">
+                <p className="px-3 pb-1 pt-1.5 text-[0.68rem] font-bold uppercase tracking-[0.22em] text-gold">{item.label}</p>
+                {item.children.map((c) => (
+                  <MenuLink key={c.href} href={c.href} onClick={onClose} className={linkCls(isActive(pathname, c.href), "py-2 text-[1.05rem]")}>
+                    {c.label}
+                    {isExternal(c.href) && <span className="ml-1 text-gold">↗</span>}
+                  </MenuLink>
+                ))}
+              </div>
+            ) : (
+              <Link key={item.href} href={item.href} onClick={onClose} className={linkCls(isActive(pathname, item.href), "py-2.5 text-[1.2rem]")}>
+                {item.label}
+              </Link>
+            )
+          )}
+        </nav>
+
+        <div className="shrink-0 border-t border-line p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
+          <a
+            href={site.links.live}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-2 rounded-full border border-wine/30 px-4 py-2.5 text-sm font-semibold text-wine hover:bg-wine hover:text-white"
+          >
+            <span className="h-2 w-2 rounded-full bg-red-600" /> {t.live}
+          </a>
+        </div>
+      </div>
+    </div>
   );
 }
 

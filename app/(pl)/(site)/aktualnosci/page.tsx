@@ -5,13 +5,16 @@ import { ArrowRight } from "lucide-react";
 
 import { PageHeader } from "@/components/page-header";
 import { Pagination } from "@/components/pagination";
-import { excerpt, formatNewsDate, news, paginate } from "@/lib/legacy";
-import { legacyUrl } from "@/lib/legacy/assets";
+import { excerpt, formatNewsDate, paginate } from "@/lib/legacy";
+import { allNews } from "@/lib/news";
 
 export const metadata: Metadata = { title: "Aktualności" };
 
+/* Wpisy dodawane w panelu — zawsze świeże */
+export const dynamic = "force-dynamic";
+
 export default async function AktualnosciPage({ searchParams }: { searchParams: Promise<{ strona?: string }> }) {
-  const { items, current, pages } = paginate(news, Number((await searchParams).strona), 10);
+  const { items, current, pages } = paginate(await allNews(), Number((await searchParams).strona), 10);
 
   return (
     <>
@@ -21,22 +24,23 @@ export default async function AktualnosciPage({ searchParams }: { searchParams: 
         <ul className="space-y-6">
           {items.map((n, i) => {
             const newest = current === 1 && i === 0;
-            const text = excerpt(n.content, newest ? 320 : 220);
+            const text = excerpt(n.html, newest ? 320 : 220);
             return (
               <li key={n.slug}>
                 <Link
                   href={`/aktualnosci/${n.slug}`}
                   className="group grid overflow-hidden rounded-2xl border border-line bg-vellum transition hover:-translate-y-0.5 hover:border-gold/60 hover:shadow-[0_24px_50px_-30px_rgba(16,29,59,0.45)] md:grid-cols-[minmax(0,22rem)_1fr]"
                 >
-                  <div className={`relative bg-lapis-deep md:aspect-auto md:min-h-56 ${n.images[0] ? "aspect-[16/9]" : "h-24"}`}>
-                    {n.images[0] ? (
+                  <div className={`relative bg-lapis-deep md:aspect-auto md:min-h-56 ${n.image ? "aspect-[16/9]" : "h-24"}`}>
+                    {n.image ? (
                       <Image
-                        src={legacyUrl(n.images[0])}
+                        src={n.image}
                         alt=""
                         fill
                         sizes="(min-width: 768px) 352px, 100vw"
                         className="object-cover transition duration-700 group-hover:scale-105"
                         priority={i < 2}
+                        unoptimized={n.local}
                       />
                     ) : (
                       <div className="lapis-sky absolute inset-0 flex items-center justify-center">

@@ -168,7 +168,7 @@ export type Church = {
   /** Zdjęcie poziome (karty na stronie głównej). */
   cover: string;
   /** Duże zdjęcie lub film pokazywany przy opisie kościoła. */
-  feature: { kind: "image" | "video"; src: string; poster?: string; caption: string };
+  feature: { kind: "image" | "video"; src: string; mobileSrc?: string; poster?: string; caption: string };
   paragraphs: string[];
   facts: { label: string; value: string }[];
   timeline: TimelineEvent[];
@@ -181,6 +181,7 @@ export const churches: Church[] = [
     feature: {
       kind: "video",
       src: "/images/fara-z-lotu.mp4",
+      mobileSrc: "/images/fara-z-lotu-720.mp4",
       poster: "/images/fara-z-lotu.jpg",
       caption: "Fara z lotu ptaka — klasycystyczny portyk i bryła wśród zieleni starego Buku",
     },

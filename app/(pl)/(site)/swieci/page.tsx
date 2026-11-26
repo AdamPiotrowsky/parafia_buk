@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 
+import { HashScrollFix } from "@/components/hash-scroll-fix";
 import { Divider, Eyebrow } from "@/components/ornament";
 import { PageHeader } from "@/components/page-header";
 import { SaintOfDayCard } from "@/components/today-bar";
@@ -55,6 +56,7 @@ export default async function SwieciPage({ searchParams }: { searchParams: Promi
 
   return (
     <>
+      <HashScrollFix />
       <PageHeader
         eyebrow="Communio sanctorum"
         title="Święci i patroni"
@@ -186,7 +188,11 @@ export default async function SwieciPage({ searchParams }: { searchParams: Promi
 
           <div className="mt-14 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {months.map((days, m) => (
-              <div key={m} className="flex flex-col rounded-2xl border border-line bg-parchment p-6">
+              <div
+                key={m}
+                id={year === now.year && m + 1 === now.month ? "biezacy-miesiac" : undefined}
+                className="flex scroll-mt-48 flex-col rounded-2xl border border-line bg-parchment p-6"
+              >
                 <h3 className="mb-4 flex items-baseline justify-between border-b border-line pb-3 font-display text-2xl font-semibold text-lapis">
                   {monthNames[m]}
                   <span className="text-sm font-normal text-ink-muted">{year}</span>

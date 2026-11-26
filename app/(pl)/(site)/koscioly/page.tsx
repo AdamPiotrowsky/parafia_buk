@@ -59,6 +59,7 @@ export default function KosciolyPage() {
                 {c.feature.kind === "video" ? (
                   <AmbientVideo
                     src={c.feature.src}
+                    mobileSrc={c.feature.mobileSrc}
                     poster={c.feature.poster ?? c.cover}
                     label={c.feature.caption}
                     className="absolute inset-0 h-full w-full object-cover"

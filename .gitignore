@@ -46,3 +46,9 @@ next-env.d.ts
 # grafik salek — bieżące rezerwacje (zapisywane przez stronę; wzór startowy w data/salki.seed.json)
 /data/salki.json
 /data/salki-log.json
+
+# panel: hasło (skrót), treści i zdjęcia dodane na stronie
+/data/admin.json
+/data/tresci.json
+/data/tresci.json.tmp
+/data/zdjecia/

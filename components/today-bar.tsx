@@ -40,7 +40,7 @@ export function TodayBar({ lang = "pl" }: { lang?: Locale }) {
         {saint && (
           <>
             <span className="mx-2 text-gold/60">✦</span>
-            <Link href="/swieci" className="hover:text-gold-pale">
+            <Link href="/swieci#biezacy-miesiac" className="hover:text-gold-pale">
               {saint.name}
             </Link>
           </>

@@ -1,6 +1,6 @@
-import { HomeSg1 } from "@/components/home/sg1";
+import { HomeSg10 } from "@/components/home/sg10";
 
-/* Strona główna — do czasu wyboru proboszcza pokazuje propozycję 1 */
+/* Strona główna — wybrana propozycja 10 „Opowieść z panelem” */
 export default function HomePage() {
-  return <HomeSg1 />;
+  return <HomeSg10 />;
 }

@@ -15,7 +15,15 @@ const milestones = imageHistory.flatMap((era) => era.events).filter((e) => e.maj
 export function HomeSg4() {
   return (
     <>
-      {/* I. Ołtarz */}
+      <Sg4Hero />
+      <Sg4Rest />
+    </>
+  );
+}
+
+/* I. Ołtarz — z dolnym paskiem skrótów (SG4) albo bez, gdy pod spodem jest panel z SG1 (SG10) */
+export function Sg4Hero({ bar = true }: { bar?: boolean }) {
+  return (
       <section className="relative flex min-h-[calc(100svh-7.25rem)] flex-col overflow-hidden bg-lapis-deep">
         <div className="absolute inset-0" aria-hidden>
           <Image src="/images/fara-oltarz-ostre.jpg" alt="" fill priority quality={92} sizes="100vw" className="object-cover object-[51%_45%]" />
@@ -23,7 +31,7 @@ export function HomeSg4() {
         {/* Lekkie przyciemnienie tylko u góry i na dole — środek zdjęcia zostaje wyraźny */}
         <div className="absolute inset-0 bg-gradient-to-b from-lapis-deep/55 via-transparent via-40% to-lapis-deep" />
 
-        <div className="relative mx-auto flex w-full max-w-7xl flex-1 flex-col items-center justify-end px-5 pb-8 pt-[38svh] text-center lg:items-start lg:justify-center lg:pt-16 lg:text-left xl:px-8">
+        <div className={`relative mx-auto flex w-full max-w-7xl flex-1 flex-col items-center justify-end px-5 pt-[38svh] ${bar ? "pb-8" : "pb-36 lg:pb-32"} text-center lg:items-start lg:justify-center lg:pt-16 lg:text-left xl:px-8`}>
           {/* Parafia i sanktuarium na granatowej tablicy — czytelne na każdym fragmencie zdjęcia */}
           <Reveal>
             <div className="mx-auto max-w-4xl rounded-3xl border border-gold/40 bg-lapis-deep/85 px-6 py-7 lg:mx-0 lg:max-w-[28rem] shadow-[0_30px_80px_-30px_rgba(8,15,35,0.9)] backdrop-blur-sm sm:px-10 sm:py-8">
@@ -34,14 +42,14 @@ export function HomeSg4() {
               </p>
             </div>
           </Reveal>
-          <a href="#obraz" className="mt-6 flex flex-col items-center gap-2 lg:hidden text-xs uppercase tracking-[0.25em] text-gold-pale [text-shadow:0_1px_8px_rgba(8,15,35,0.9)] hover:text-white">
+          {bar && <a href="#obraz" className="mt-6 flex flex-col items-center gap-2 lg:hidden text-xs uppercase tracking-[0.25em] text-gold-pale [text-shadow:0_1px_8px_rgba(8,15,35,0.9)] hover:text-white">
             Wejdź
             <ChevronDown className="animate-bounce motion-reduce:animate-none" size={22} />
-          </a>
+          </a>}
         </div>
 
         {/* Najważniejsze od razu, na dole pierwszego ekranu */}
-        <div className="relative border-t border-gold/25 bg-lapis-deep/70 backdrop-blur">
+        {bar && <div className="relative border-t border-gold/25 bg-lapis-deep/70 backdrop-blur">
           <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-6 px-5 py-5 lg:px-8">
             <div className="flex flex-wrap justify-center gap-2">
               {shortcuts.slice(0, 4).map(({ title, href, external }) =>
@@ -57,9 +65,14 @@ export function HomeSg4() {
               )}
             </div>
           </div>
-        </div>
+        </div>}
       </section>
+  );
+}
 
+function Sg4Rest() {
+  return (
+    <>
       {/* II. Obraz */}
       <section id="obraz" className="grid scroll-mt-28 lg:min-h-screen lg:grid-cols-2">
         <div className="relative min-h-[70vh] bg-lapis-deep">

@@ -7,7 +7,11 @@ const nextConfig: NextConfig = {
    * ale skrypty są blokowane i nic nie da się kliknąć.
    */
   /* Wspólna strona 404 dla kilku głównych layoutów (polski i /en, /de, /es) */
-  experimental: { globalNotFound: true },
+  experimental: {
+    globalNotFound: true,
+    /* Panel: zdjęcia aktualności z telefonu mają po kilka MB (domyślny limit akcji to 1 MB) */
+    serverActions: { bodySizeLimit: "16mb" },
+  },
 
   allowedDevOrigins: ["192.168.1.12", "192.168.1.*", "192.168.0.*"],
 

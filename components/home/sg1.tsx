@@ -63,6 +63,15 @@ export function HomeSg1() {
         </div>
       </section>
 
+      <Sg1Body />
+    </>
+  );
+}
+
+/* Panel „na skróty” i dalsza część SG1 — używane też w SG10 */
+export function Sg1Body() {
+  return (
+    <>
       {/* NA SKRÓTY */}
       <section className="relative z-10 mx-auto -mt-28 max-w-7xl px-5 lg:px-8">
         <div className="rounded-2xl border border-gold/30 bg-vellum p-3 shadow-[0_40px_80px_-40px_rgba(16,29,59,0.45)] sm:p-4">
@@ -95,7 +104,7 @@ export function HomeSg1() {
       <section className="mx-auto grid max-w-7xl gap-6 px-5 py-20 lg:grid-cols-3 lg:px-8">
         <div className="rounded-2xl border border-line bg-vellum p-8">
           <SaintOfDayCard />
-          <Link href="/swieci" className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-lapis hover:text-gold">
+          <Link href="/swieci#biezacy-miesiac" className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-lapis hover:text-gold">
             Kalendarz świętych <ArrowRight size={15} />
           </Link>
         </div>
@@ -186,6 +195,7 @@ export function HomeSg1() {
       <section className="relative h-[70vh] min-h-[28rem] overflow-hidden bg-lapis-deep">
         <AmbientVideo
           src="/images/fara-z-lotu.mp4"
+          mobileSrc="/images/fara-z-lotu-720.mp4"
           poster="/images/fara-z-lotu.jpg"
           label="Przelot drona wokół kościoła farnego w Buku"
           className="absolute inset-0 h-full w-full object-cover"

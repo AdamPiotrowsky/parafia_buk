@@ -77,4 +77,11 @@ export const variants = [
     name: "Tablica",
     text: "Ołtarz na całą szerokość przechodzący w granat, a na nim granatowa tablica: parafia, sanktuarium i najbliższa Msza.",
   },
+  {
+    id: 10,
+    href: "/sg10",
+    image: "/images/fara-oltarz-ostre.jpg",
+    name: "Opowieść z panelem",
+    text: "Góra z „Opowieści” — wyraźny ołtarz z granatową tablicą parafii i sanktuarium — a pod nią panel na skróty z „Iluminacji”: ogłoszenia, intencje, transmisja, spowiedź i reszta.",
+  },
 ];

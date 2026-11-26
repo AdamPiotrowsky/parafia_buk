@@ -1,7 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
 
 import { DocumentContent } from "@/components/documents/document-content";
-import type { Bulletin } from "@/lib/bulletins";
+import type { Bulletin, BulletinArchiveItem } from "@/lib/bulletins";
 
 export function BulletinView({
   bulletin,
@@ -41,6 +41,42 @@ function PrintHint() {
       Treść publikowana jest co tydzień. Pytania? Zadzwoń do biura parafialnego: <br />
       <a href="tel:618140141" className="font-semibold text-lapis">61 8140 141</a>
       <span className="mt-1 block text-xs">w godzinach pracy biura: wt., czw., pt., sob. 9:00–11:00 · śr. 16:00–18:00</span>
+    </div>
+  );
+}
+
+/* Poprzednie tygodnie — z panelu zostają w archiwum */
+export function BulletinArchive({
+  base,
+  items,
+  currentId,
+  latestId,
+}: {
+  base: string;
+  items: BulletinArchiveItem[];
+  currentId?: string;
+  latestId?: string;
+}) {
+  if (items.length < 2) return null;
+  return (
+    <div className="rounded-2xl border border-line bg-vellum p-6">
+      <p className="text-[0.7rem] font-bold uppercase tracking-[0.22em] text-gold">Poprzednie tygodnie</p>
+      <ul className="mt-3 space-y-1">
+        {items.map((b) => (
+          <li key={b.id}>
+            <a
+              href={b.id === latestId ? base : `${base}?wpis=${b.id}`}
+              aria-current={b.id === currentId ? "page" : undefined}
+              className={`block rounded-lg px-3 py-2 text-sm transition ${
+                b.id === currentId ? "bg-lapis text-gold-pale" : "text-ink-soft hover:bg-parchment"
+              }`}
+            >
+              <span className="block font-semibold">{b.title}</span>
+              {b.dateLabel && <span className="text-xs opacity-75">{b.dateLabel}</span>}
+            </a>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

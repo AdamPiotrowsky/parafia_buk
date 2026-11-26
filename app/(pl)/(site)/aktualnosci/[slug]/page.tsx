@@ -4,21 +4,21 @@ import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 
 import { PageHeader } from "@/components/page-header";
-import { formatNewsDate, news } from "@/lib/legacy";
-import { legacyHtml } from "@/lib/legacy/assets";
+import { formatNewsDate } from "@/lib/legacy";
+import { allNews } from "@/lib/news";
 
-export function generateStaticParams() {
-  return news.map((n) => ({ slug: n.slug }));
-}
+/* Wpisy dodawane w panelu — zawsze świeże */
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const slug = decodeURIComponent((await params).slug);
-  const item = news.find((n) => n.slug === slug);
+  const item = (await allNews()).find((n) => n.slug === slug);
   return { title: item?.title ?? "Aktualności" };
 }
 
 export default async function AktualnoscPage({ params }: { params: Promise<{ slug: string }> }) {
   const slug = decodeURIComponent((await params).slug);
+  const news = await allNews();
   const index = news.findIndex((n) => n.slug === slug);
   if (index < 0) notFound();
   const item = news[index];
@@ -34,9 +34,15 @@ export default async function AktualnoscPage({ params }: { params: Promise<{ slu
           <ArrowLeft size={15} /> Wszystkie aktualności
         </Link>
 
+        {/* Zdjęcie dodane w panelu (stare wpisy mają zdjęcia w treści) */}
+        {item.local && item.image && (
+          // eslint-disable-next-line @next/next/no-img-element -- zdjęcie już zmniejszone przy zapisie
+          <img src={item.image} alt="" className="mt-8 w-full rounded-2xl border border-line object-cover" />
+        )}
+
         <article
           className="document-content news-content mt-8 rounded-2xl border border-line bg-vellum p-6 sm:p-10"
-          dangerouslySetInnerHTML={{ __html: legacyHtml(item.content) }}
+          dangerouslySetInnerHTML={{ __html: item.html }}
         />
 
         <nav className="mt-10 grid gap-4 sm:grid-cols-2">
