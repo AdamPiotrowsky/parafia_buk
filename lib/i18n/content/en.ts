@@ -25,6 +25,75 @@ export const en: PageContent = {
       "The Child Jesus blesses with one hand and holds a thick book in the other — the sign of the “literati”, the old church confraternities that gave the image its name.",
     imageLink: "History of the image",
     more: "Read more",
+    panel: {
+      hero: {
+        parish: [
+          "Parish of St. Stanislaus",
+          "in Buk"
+        ],
+        sanctuary: [
+          "Sanctuary of Our Lady",
+          "of Buk “Literacka”"
+        ]
+      },
+      shortcuts: {
+        sanctuary: {
+          title: "Sanctuary",
+          hint: "The miraculous image"
+        },
+        masses: {
+          title: "Mass times",
+          hint: "Sundays and weekdays"
+        },
+        churches: {
+          title: "Churches",
+          hint: "Two churches, one parish"
+        },
+        sacraments: {
+          title: "Sacraments",
+          hint: "Baptism, marriage, confession"
+        },
+        saints: {
+          title: "Saints",
+          hint: "Our patrons and relics"
+        },
+        live: {
+          title: "Live stream",
+          hint: "Mass from the parish church"
+        },
+        contact: {
+          title: "Contact",
+          hint: "Parish office and directions"
+        },
+        announcements: {
+          title: "Announcements",
+          hint: "Weekly, in Polish"
+        }
+      },
+      weekday: "Weekdays",
+      officeLabel: "Parish office",
+      fullSchedule: "Full schedule",
+      imageEyebrow: "History of the image",
+      imageMore: "Fr. Prof. Szczęsny Dettloff, who restored the image in 1933, wrote that such a Hodegetria cannot be found anywhere outside Poland.",
+      keyYears: [
+        "first record",
+        "declared miraculous",
+        "bull of Pius VI",
+        "burned in a fire",
+        "coronation"
+      ],
+      videoEyebrow: "The parish church from the air",
+      videoTitle: "St. Stanislaus Church — the heart of Buk since the 13th century",
+      videoLink: "History of the church",
+      churchesEyebrow: "Two churches, one parish",
+      churchesTitle: "Our churches",
+      churchLink: "History of the church",
+      churchIntro: {
+        fara: "The heart of the parish and home of Our Lady of Buk. The third church on this site — designed by Schinkel and twice raised from ruins.",
+        "swiety-krzyz": "The oldest place in Buk — the site of the former stronghold. A wooden church on a Greek-cross plan, which in 1806 gave shelter to the miraculous image."
+      },
+      contactLink: "Plan a visit"
+    },
   },
 
   sanctuary: {

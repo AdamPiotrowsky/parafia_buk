@@ -25,6 +25,75 @@ export const de: PageContent = {
       "Das Jesuskind segnet mit der einen Hand und hält in der anderen ein dickes Buch – das Zeichen der „Literaten“, der alten kirchlichen Bruderschaften, nach denen das Bild benannt ist.",
     imageLink: "Geschichte des Gnadenbildes",
     more: "Mehr erfahren",
+    panel: {
+      hero: {
+        parish: [
+          "Pfarrei St. Stanislaus",
+          "in Buk"
+        ],
+        sanctuary: [
+          "Heiligtum der Muttergottes",
+          "von Buk „Literacka“"
+        ]
+      },
+      shortcuts: {
+        sanctuary: {
+          title: "Heiligtum",
+          hint: "Das Gnadenbild"
+        },
+        masses: {
+          title: "Messzeiten",
+          hint: "Sonn- und Werktage"
+        },
+        churches: {
+          title: "Kirchen",
+          hint: "Zwei Kirchen, eine Pfarrei"
+        },
+        sacraments: {
+          title: "Sakramente",
+          hint: "Taufe, Ehe, Beichte"
+        },
+        saints: {
+          title: "Heilige",
+          hint: "Patrone und Reliquien"
+        },
+        live: {
+          title: "Livestream",
+          hint: "Messe aus der Pfarrkirche"
+        },
+        contact: {
+          title: "Kontakt",
+          hint: "Pfarrbüro und Anfahrt"
+        },
+        announcements: {
+          title: "Ankündigungen",
+          hint: "Wöchentlich, auf Polnisch"
+        }
+      },
+      weekday: "Werktage",
+      officeLabel: "Pfarrbüro",
+      fullSchedule: "Alle Zeiten",
+      imageEyebrow: "Geschichte des Bildes",
+      imageMore: "Prof. Szczęsny Dettloff, der das Bild 1933 restaurierte, schrieb, eine solche Hodegetria finde man außerhalb Polens nirgends.",
+      keyYears: [
+        "erste Erwähnung",
+        "als wundertätig anerkannt",
+        "Bulle Pius’ VI.",
+        "im Feuer verbrannt",
+        "Krönung"
+      ],
+      videoEyebrow: "Die Pfarrkirche aus der Luft",
+      videoTitle: "Kirche St. Stanislaus — das Herz von Buk seit dem 13. Jahrhundert",
+      videoLink: "Geschichte der Kirche",
+      churchesEyebrow: "Zwei Kirchen, eine Pfarrei",
+      churchesTitle: "Unsere Kirchen",
+      churchLink: "Geschichte der Kirche",
+      churchIntro: {
+        fara: "Das Herz der Pfarrei und Heimat der Muttergottes von Buk. Die dritte Kirche an dieser Stelle — nach einem Entwurf Schinkels, zweimal aus Ruinen wiederaufgebaut.",
+        "swiety-krzyz": "Der älteste Ort von Buk — das Gelände der einstigen Burg. Eine Holzkirche über dem Grundriss eines griechischen Kreuzes, die 1806 das Gnadenbild aufnahm."
+      },
+      contactLink: "Besuch planen"
+    },
   },
 
   sanctuary: {

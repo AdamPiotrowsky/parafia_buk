@@ -87,10 +87,17 @@ export function SiteHeader({ lang = "pl" }: { lang?: Locale }) {
               </span>
               <span className="leading-tight">
                 <span className="block font-display text-[1.2rem] font-semibold leading-tight text-lapis sm:text-[1.35rem]">{t.parishShort}</span>
-                <span className="block text-[0.68rem] uppercase tracking-[0.2em] text-ink-muted">
+                {/* Inne języki mają dłuższe nazwy — na telefonie mniejszy napis i bez archidiecezji, żeby wszystko zmieściło się w pasku */}
+                <span
+                  className={`block uppercase text-ink-muted ${
+                    lang === "pl" ? "text-[0.68rem] tracking-[0.2em]" : "text-[0.6rem] tracking-[0.12em] sm:text-[0.68rem] sm:tracking-[0.2em]"
+                  }`}
+                >
                   {t.sanctuary}
                 </span>
-                <span className="block text-[0.62rem] font-semibold uppercase tracking-[0.2em] text-gold md:hidden">
+                <span
+                  className={`text-[0.62rem] font-semibold uppercase tracking-[0.2em] text-gold md:hidden ${lang === "pl" ? "block" : "hidden sm:block"}`}
+                >
                   {t.diocese}
                 </span>
               </span>

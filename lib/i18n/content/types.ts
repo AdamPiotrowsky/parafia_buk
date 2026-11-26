@@ -1,5 +1,7 @@
 import type { TimelineEvent } from "@/lib/history";
 
+export type HomeShortcutKey = "sanctuary" | "masses" | "churches" | "sacraments" | "saints" | "live" | "contact" | "announcements";
+
 /* Treść stałych stron w jednym języku — układ stron jest wspólny (app/[lang]) */
 export type PageContent = {
   home: {
@@ -15,6 +17,25 @@ export type PageContent = {
     imageText: string;
     imageLink: string;
     more: string;
+    /* Teksty wspólnego układu strony głównej (jak w wersji polskiej) */
+    panel: {
+      hero: { parish: [string, string]; sanctuary: [string, string] };
+      shortcuts: Record<HomeShortcutKey, { title: string; hint: string }>;
+      weekday: string;
+      officeLabel: string;
+      fullSchedule: string;
+      imageEyebrow: string;
+      imageMore: string;
+      keyYears: [string, string, string, string, string];
+      videoEyebrow: string;
+      videoTitle: string;
+      videoLink: string;
+      churchesEyebrow: string;
+      churchesTitle: string;
+      churchLink: string;
+      churchIntro: Record<"fara" | "swiety-krzyz", string>;
+      contactLink: string;
+    };
   };
 
   sanctuary: {

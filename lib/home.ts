@@ -10,6 +10,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
+import { churches } from "@/lib/history";
 import { site } from "@/lib/site";
 
 export type Shortcut = {
@@ -85,3 +86,87 @@ export const variants = [
     text: "Góra z „Opowieści” — wyraźny ołtarz z granatową tablicą parafii i sanktuarium — a pod nią panel na skróty z „Iluminacji”: ogłoszenia, intencje, transmisja, spowiedź i reszta.",
   },
 ];
+
+/* Teksty wspólnego układu strony głównej (components/home/home-layout.tsx) w jednym języku */
+export type HomeTexts = {
+  hero: { diocese: string; parish: [string, string]; sanctuary: [string, string] };
+  shortcuts: Shortcut[];
+  masses: {
+    title: string;
+    sunday: string;
+    weekday: string;
+    note?: string;
+    officeLabel: string;
+    office: string;
+    full: string;
+    fullHref: string;
+  };
+  image: {
+    eyebrow: string;
+    title: string;
+    paragraphs: string[];
+    alt: string;
+    caption: string;
+    keyYears: { year: string; text: string }[];
+    link: string;
+    linkHref: string;
+  };
+  video: { eyebrow: string; title: string; link: string; href: string; label: string };
+  churches: {
+    eyebrow: string;
+    title: string;
+    link: string;
+    href: string;
+    items: Record<"fara" | "swiety-krzyz", { name: string; subtitle: string; intro: string }>;
+  };
+};
+
+const [faraPl, krzyzPl] = churches;
+
+export const plHome: HomeTexts = {
+  hero: {
+    diocese: site.diocese,
+    parish: ["Parafia św. Stanisława", "w Buku"],
+    sanctuary: ["Sanktuarium Matki Bożej", "Bukowskiej Literackiej"],
+  },
+  shortcuts,
+  masses: {
+    title: "Msze Święte",
+    sunday: "Niedziele i święta",
+    weekday: "Dni powszednie",
+    officeLabel: "Biuro parafialne",
+    office: site.officeHours.map((o) => `${o.days} ${o.hours}`).join(" · "),
+    full: "Pełny porządek",
+    fullHref: "/msze",
+  },
+  image: {
+    eyebrow: "Historia obrazu",
+    title: "Hodegetria z księgą w dłoni Dzieciątka",
+    paragraphs: [
+      "Maryja trzyma Jezusa na lewym ramieniu. Dzieciątko jedną ręką błogosławi, w drugiej trzyma grubą księgę — znak literatów, dawnych bractw, które śpiewały w kościele godzinki. Aniołowie zamiast kadzielnic niosą wstęgi z napisami „Wesel się, Królowo miła” i „Zdrowaś Maryjo”.",
+      "Ks. prof. Szczęsny Dettloff, który odnawiał obraz w 1933 roku, pisał, że takiej Hodegetrii poza Polską nie znajdziemy nigdzie.",
+    ],
+    alt: "Matka Boża Bukowska Literacka",
+    caption: "Wizerunek w ołtarzu głównym fary",
+    keyYears,
+    link: "Poznaj całą historię",
+    linkHref: "/sanktuarium#historia",
+  },
+  video: {
+    eyebrow: "Fara z lotu ptaka",
+    title: "Kościół św. Stanisława — serce Buku od XIII wieku",
+    link: "Historia fary",
+    href: "/koscioly#fara",
+    label: "Przelot drona wokół kościoła farnego w Buku",
+  },
+  churches: {
+    eyebrow: "Dwa kościoły, jedna parafia",
+    title: "Nasze świątynie",
+    link: "Historia kościoła",
+    href: "/koscioly",
+    items: {
+      fara: { name: faraPl.name, subtitle: faraPl.subtitle, intro: faraPl.intro },
+      "swiety-krzyz": { name: krzyzPl.name, subtitle: krzyzPl.subtitle, intro: krzyzPl.intro },
+    },
+  },
+};

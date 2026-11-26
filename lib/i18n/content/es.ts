@@ -25,6 +25,75 @@ export const es: PageContent = {
       "El Niño Jesús bendice con una mano y sostiene en la otra un libro grueso, signo de los «literatos», las antiguas cofradías que dieron nombre a la imagen.",
     imageLink: "Historia de la imagen",
     more: "Más información",
+    panel: {
+      hero: {
+        parish: [
+          "Parroquia de",
+          "San Estanislao en Buk"
+        ],
+        sanctuary: [
+          "Santuario de Nuestra Señora",
+          "de Buk «Literacka»"
+        ]
+      },
+      shortcuts: {
+        sanctuary: {
+          title: "Santuario",
+          hint: "La imagen milagrosa"
+        },
+        masses: {
+          title: "Misas",
+          hint: "Domingos y días laborables"
+        },
+        churches: {
+          title: "Iglesias",
+          hint: "Dos iglesias, una parroquia"
+        },
+        sacraments: {
+          title: "Sacramentos",
+          hint: "Bautismo, matrimonio, confesión"
+        },
+        saints: {
+          title: "Santos",
+          hint: "Patronos y reliquias"
+        },
+        live: {
+          title: "En directo",
+          hint: "Misa desde la iglesia parroquial"
+        },
+        contact: {
+          title: "Contacto",
+          hint: "Despacho parroquial y cómo llegar"
+        },
+        announcements: {
+          title: "Avisos",
+          hint: "Semanales, en polaco"
+        }
+      },
+      weekday: "Días laborables",
+      officeLabel: "Despacho parroquial",
+      fullSchedule: "Horario completo",
+      imageEyebrow: "Historia de la imagen",
+      imageMore: "El P. Prof. Szczęsny Dettloff, que restauró la imagen en 1933, escribió que una Hodegetria así no se encuentra en ningún lugar fuera de Polonia.",
+      keyYears: [
+        "primera mención",
+        "declarada milagrosa",
+        "bula de Pío VI",
+        "ardió en un incendio",
+        "coronación"
+      ],
+      videoEyebrow: "La iglesia parroquial desde el aire",
+      videoTitle: "Iglesia de San Estanislao — el corazón de Buk desde el siglo XIII",
+      videoLink: "Historia de la iglesia",
+      churchesEyebrow: "Dos iglesias, una parroquia",
+      churchesTitle: "Nuestras iglesias",
+      churchLink: "Historia de la iglesia",
+      churchIntro: {
+        fara: "El corazón de la parroquia y hogar de Nuestra Señora de Buk. La tercera iglesia en este lugar — diseñada por Schinkel y levantada dos veces de las ruinas.",
+        "swiety-krzyz": "El lugar más antiguo de Buk — el emplazamiento del antiguo castro. Una iglesia de madera en planta de cruz griega que en 1806 acogió la imagen milagrosa."
+      },
+      contactLink: "Planificar una visita"
+    },
   },
 
   sanctuary: {
