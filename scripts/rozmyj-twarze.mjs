@@ -1,13 +1,15 @@
 /*
  * Delikatnie rozmywa twarze na zdjęciu ołtarza fary (ochrona wizerunku osób na Mszy).
- * Uruchomienie: node scripts/rozmyj-twarze.mjs <wejście.jpg> <wyjście.jpg>
+ * Uruchomienie: node scripts/rozmyj-twarze.mjs <wejście.jpg> <wyjście.jpg> [siła, domyślnie 1.3]
  * Miejsca twarzy dobrane ręcznie dla kadru 1600×1066 (fara-oltarz*.jpg).
  */
 import sharp from "sharp";
 
 sharp.cache(false);
 
-const [input, output] = process.argv.slice(2);
+const [input, output, strengthArg] = process.argv.slice(2);
+// siła rozmycia (sigma) — małe twarze w tym kadrze wystarczy lekko zmiękczyć, żeby z daleka nie było śladu
+const strength = Number(strengthArg ?? 1.3);
 if (!input || !output) {
   console.error("Użycie: node scripts/rozmyj-twarze.mjs <wejście.jpg> <wyjście.jpg>");
   process.exit(1);
@@ -30,10 +32,10 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${
   <rect width="100%" height="100%" fill="black"/>
   ${faces.map(([cx, cy, rx, ry]) => `<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="white"/>`).join("\n  ")}
 </svg>`;
-const mask = await sharp(Buffer.from(svg)).blur(4).extractChannel(0).raw().toBuffer();
+const mask = await sharp(Buffer.from(svg)).blur(6).extractChannel(0).raw().toBuffer();
 
 // dwa kroki: sharp wykonuje operacje w stałej kolejności, więc rozmycie i dołożenie maski muszą być osobno
-const blurredRgb = await sharp(input).blur(5).removeAlpha().raw().toBuffer();
+const blurredRgb = await sharp(input).blur(strength).removeAlpha().raw().toBuffer();
 const blurred = await sharp(blurredRgb, { raw: { width, height, channels: 3 } })
   .joinChannel(mask, { raw: { width, height, channels: 1 } })
   .png()
