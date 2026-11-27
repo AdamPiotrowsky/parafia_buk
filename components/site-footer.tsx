@@ -12,7 +12,7 @@ export function SiteFooter({ lang = "pl" }: { lang?: Locale }) {
   const t = ui[lang];
   const links = t.nav.flatMap((item) => (item.children ? item.children : [item]));
   return (
-    <footer className="lapis-sky pb-24 text-gold-pale/80 sm:pb-0">
+    <footer className="lapis-sky text-gold-pale/80">
       <div className="mx-auto max-w-7xl px-5 py-16 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>

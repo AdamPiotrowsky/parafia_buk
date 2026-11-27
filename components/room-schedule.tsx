@@ -398,7 +398,7 @@ export function RoomSchedule() {
       )}
 
       {notice && (
-        <div className="fixed bottom-24 left-1/2 z-[70] -translate-x-1/2 rounded-full bg-lapis-deep px-5 py-3 text-sm font-semibold text-gold-pale shadow-xl sm:bottom-8" role="status">
+        <div className="fixed bottom-[max(2rem,env(safe-area-inset-bottom))] left-1/2 z-[70] -translate-x-1/2 rounded-full bg-lapis-deep px-5 py-3 text-sm font-semibold text-gold-pale shadow-xl" role="status">
           {notice}
         </div>
       )}

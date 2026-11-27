@@ -5,7 +5,6 @@
 import { mainNav, site, type NavItem } from "@/lib/site";
 import { href, type Locale } from "@/lib/i18n/config";
 
-export type DockItem = { label: string; href: string; icon: "mass" | "news" | "intentions" | "church" | "contact" };
 
 export type Ui = {
   diocese: string;
@@ -18,11 +17,9 @@ export type Ui = {
   menuClose: string;
   mainNavLabel: string;
   mobileNavLabel: string;
-  quickNavLabel: string;
   languageLabel: string;
   facebook: string;
   nav: NavItem[];
-  dock: DockItem[];
   officeHours: { days: string; hours: string }[];
   footer: {
     address: string;
@@ -53,12 +50,6 @@ const foreignNav = (lang: Exclude<Locale, "pl">, l: [string, string, string, str
   { label: l[5], href: href("/kontakt", lang) },
 ];
 
-const foreignDock = (lang: Exclude<Locale, "pl">, l: [string, string, string]): DockItem[] => [
-  { label: l[0], href: href("/msze", lang), icon: "mass" },
-  { label: l[1], href: href("/sanktuarium", lang), icon: "church" },
-  { label: l[2], href: href("/kontakt", lang), icon: "contact" },
-];
-
 export const ui: Record<Locale, Ui> = {
   pl: {
     diocese: site.diocese,
@@ -71,15 +62,9 @@ export const ui: Record<Locale, Ui> = {
     menuClose: "Zamknij menu",
     mainNavLabel: "Główna nawigacja",
     mobileNavLabel: "Menu mobilne",
-    quickNavLabel: "Szybki dostęp",
     languageLabel: "Język strony",
     facebook: "Parafia na Facebooku",
     nav: mainNav,
-    dock: [
-      { label: "Msze", href: "/msze", icon: "mass" },
-      { label: "Ogłoszenia", href: "/ogloszenia", icon: "news" },
-      { label: "Intencje", href: "/intencje", icon: "intentions" },
-    ],
     officeHours: site.officeHours,
     footer: {
       address: "Adres",
@@ -104,11 +89,9 @@ export const ui: Record<Locale, Ui> = {
     menuClose: "Close menu",
     mainNavLabel: "Main navigation",
     mobileNavLabel: "Mobile menu",
-    quickNavLabel: "Quick access",
     languageLabel: "Language",
     facebook: "The parish on Facebook",
     nav: foreignNav("en", ["Sanctuary", "Churches", "Mass times", "Sacraments", "Saints", "Contact"]),
-    dock: foreignDock("en", ["Masses", "Sanctuary", "Contact"]),
     officeHours: [
       { days: "Tuesday, Thursday, Friday, Saturday", hours: "9:00 – 11:00" },
       { days: "Wednesday", hours: "16:00 – 18:00" },
@@ -141,11 +124,9 @@ export const ui: Record<Locale, Ui> = {
     menuClose: "Menü schließen",
     mainNavLabel: "Hauptnavigation",
     mobileNavLabel: "Mobiles Menü",
-    quickNavLabel: "Schnellzugriff",
     languageLabel: "Sprache",
     facebook: "Die Pfarrei auf Facebook",
     nav: foreignNav("de", ["Heiligtum", "Kirchen", "Messzeiten", "Sakramente", "Heilige", "Kontakt"]),
-    dock: foreignDock("de", ["Messen", "Heiligtum", "Kontakt"]),
     officeHours: [
       { days: "Dienstag, Donnerstag, Freitag, Samstag", hours: "9:00 – 11:00" },
       { days: "Mittwoch", hours: "16:00 – 18:00" },
@@ -178,11 +159,9 @@ export const ui: Record<Locale, Ui> = {
     menuClose: "Cerrar menú",
     mainNavLabel: "Navegación principal",
     mobileNavLabel: "Menú móvil",
-    quickNavLabel: "Acceso rápido",
     languageLabel: "Idioma",
     facebook: "La parroquia en Facebook",
     nav: foreignNav("es", ["Santuario", "Iglesias", "Horario de misas", "Sacramentos", "Santos", "Contacto"]),
-    dock: foreignDock("es", ["Misas", "Santuario", "Contacto"]),
     officeHours: [
       { days: "martes, jueves, viernes, sábado", hours: "9:00 – 11:00" },
       { days: "miércoles", hours: "16:00 – 18:00" },

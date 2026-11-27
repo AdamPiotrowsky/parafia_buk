@@ -4,13 +4,13 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Church, ChevronDown, Clock, Mail, Megaphone, Menu, Radio, ScrollText, X } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 
 import { FacebookIcon } from "@/components/icons";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { TodayBar } from "@/components/today-bar";
 import { href, type Locale } from "@/lib/i18n/config";
-import { ui, type DockItem } from "@/lib/i18n/ui";
+import { ui } from "@/lib/i18n/ui";
 import { site, type NavItem } from "@/lib/site";
 
 function isActive(pathname: string, href: string) {
@@ -81,25 +81,20 @@ export function SiteHeader({ lang = "pl" }: { lang?: Locale }) {
 
         <div className="border-b border-line bg-parchment/95 backdrop-blur">
           <div className="mx-auto flex h-[4.5rem] max-w-7xl items-center justify-between gap-6 px-5 lg:px-8">
-            <Link href={href("", lang)} className="group flex items-center gap-3">
-              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-lapis ring-1 ring-gold/50 transition group-hover:ring-gold">
+            <Link href={href("", lang)} className="group flex min-w-0 items-center gap-3">
+              {/* shrink-0: bez tego na wąskim ekranie kółko ściskało się w pionowy owal */}
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-lapis ring-1 ring-gold/50 transition group-hover:ring-gold">
                 <Image src="/logo/postac-gold.png" alt="" width={40} height={40} className="h-10 w-10" priority />
               </span>
-              <span className="leading-tight">
-                <span className="block font-display text-[1.2rem] font-semibold leading-tight text-lapis sm:text-[1.35rem]">{t.parishShort}</span>
-                {/* Inne języki mają dłuższe nazwy — na telefonie mniejszy napis i bez archidiecezji, żeby wszystko zmieściło się w pasku */}
-                <span
-                  className={`block uppercase text-ink-muted ${
-                    lang === "pl" ? "text-[0.68rem] tracking-[0.2em]" : "text-[0.6rem] tracking-[0.12em] sm:text-[0.68rem] sm:tracking-[0.2em]"
-                  }`}
-                >
-                  {t.sanctuary}
-                </span>
-                <span
-                  className={`text-[0.62rem] font-semibold uppercase tracking-[0.2em] text-gold md:hidden ${lang === "pl" ? "block" : "hidden sm:block"}`}
-                >
-                  {t.diocese}
-                </span>
+              {/* Telefon: nazwa parafii jest w dużym kafelku na stronie, więc w pasku tylko sanktuarium i archidiecezja */}
+              <span className="min-w-0 leading-tight sm:hidden">
+                <span className="block font-display text-[1.05rem] font-semibold leading-[1.15] text-lapis">{t.sanctuary}</span>
+                <span className="mt-0.5 block text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-gold">{t.diocese}</span>
+              </span>
+              <span className="hidden leading-tight sm:block">
+                <span className="block font-display text-[1.35rem] font-semibold leading-tight text-lapis">{t.parishShort}</span>
+                <span className="block text-[0.68rem] uppercase tracking-[0.2em] text-ink-muted">{t.sanctuary}</span>
+                <span className="block text-[0.62rem] font-semibold uppercase tracking-[0.2em] text-gold md:hidden">{t.diocese}</span>
               </span>
             </Link>
 
@@ -145,7 +140,6 @@ export function SiteHeader({ lang = "pl" }: { lang?: Locale }) {
       </header>
 
       <MobileDrawer open={open} onClose={closeMenu} pathname={pathname} lang={lang} />
-      <MobileDock pathname={pathname} items={t.dock} live={t.live} label={t.quickNavLabel} />
     </>
   );
 }
@@ -301,44 +295,5 @@ function NavDropdown({ item, pathname }: { item: NavItem; pathname: string }) {
         </ul>
       </div>
     </div>
-  );
-}
-
-/* Dolny pasek na telefonie — najczęściej używane rzeczy pod kciukiem */
-const dockIcons = { mass: Clock, news: Megaphone, intentions: ScrollText, church: Church, contact: Mail };
-
-function MobileDock({ pathname, items, live, label }: { pathname: string; items: DockItem[]; live: string; label: string }) {
-  return (
-    <nav
-      className="fixed inset-x-0 bottom-0 z-50 border-t border-gold/30 bg-lapis-deep/95 pb-[env(safe-area-inset-bottom)] backdrop-blur sm:hidden"
-      aria-label={label}
-    >
-      <div className="grid grid-cols-4">
-        {items.map(({ label, href, icon }) => {
-          const Icon = dockIcons[icon];
-          return (
-          <Link
-            key={href}
-            href={href}
-            className={`flex flex-col items-center gap-1 py-2.5 text-[0.68rem] font-medium ${
-              isActive(pathname, href) ? "text-gold-light" : "text-gold-pale/70"
-            }`}
-          >
-            <Icon size={20} strokeWidth={1.6} />
-            {label}
-          </Link>
-          );
-        })}
-        <a
-          href={site.links.live}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex flex-col items-center gap-1 py-2.5 text-[0.68rem] font-medium text-gold-pale/70"
-        >
-          <Radio size={20} strokeWidth={1.6} className="text-red-400" />
-          {live}
-        </a>
-      </div>
-    </nav>
   );
 }

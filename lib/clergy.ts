@@ -1,12 +1,12 @@
 /*
  * Duszpasterze parafii — lista proboszczów i kapłanów pochodzących z parafii
- * według dotychczasowej strony sanktuarium-buk.pl, uzupełniona o zmianę proboszcza w 2025 roku.
+ * według dotychczasowej strony sanktuarium-buk.pl, uzupełniona o zmianę proboszcza w 2024 roku.
  */
 
 export const currentPastor = {
   name: "ks. Paweł Froelich",
   role: "Proboszcz parafii",
-  since: "2025",
+  since: "2024",
 };
 
 /* Pozostali duszpasterze posługujący obecnie w parafii */
@@ -33,8 +33,8 @@ export const pastors: Pastor[] = [
   { years: "1958 – 1982", name: "ks. inf. Teofil Ratajczak", note: "† 15.09.2004" },
   { years: "1982 – 1989", name: "ks. dr Zygmunt Jonaczyk", note: "† 1.11.1999" },
   { years: "1989 – 1997", name: "ks. prał. Jan Majchrzak", note: "† 18.06.2025" },
-  { years: "1997 – 2025", name: "ks. prał. Andrzej Szczepaniak", note: "sanktuarium (2015) i koronacja obrazu (2017)" },
-  { years: "od 2025", name: "ks. Paweł Froelich" },
+  { years: "1997 – 2024", name: "ks. prał. Andrzej Szczepaniak", note: "sanktuarium (2015) i koronacja obrazu (2017)" },
+  { years: "od 2024", name: "ks. Paweł Froelich" },
 ];
 
 /* Kapłani i zakonnicy pochodzący z parafii — w nawiasie rok święceń */
