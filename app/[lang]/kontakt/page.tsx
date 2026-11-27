@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
 
 import { CopyButton } from "@/components/copy-button";
+import { OfficeStatusLine, OfficeWeekList } from "@/components/office-hours";
 import { PageHeader } from "@/components/page-header";
 import type { ForeignLocale } from "@/lib/i18n/config";
 import { content } from "@/lib/i18n/content";
@@ -29,14 +30,12 @@ export default async function ContactPage({ params }: PageProps<"/[lang]/kontakt
               <Clock size={22} strokeWidth={1.6} />
               <p className="text-[0.72rem] font-bold uppercase tracking-[0.25em]">{u.footer.office}</p>
             </div>
-            <dl className="mt-6 divide-y divide-line">
-              {u.officeHours.map((o) => (
-                <div key={o.days} className="flex flex-wrap items-baseline justify-between gap-2 py-3">
-                  <dt className="text-ink-soft first-letter:uppercase">{o.days}</dt>
-                  <dd className="font-display text-2xl font-semibold tabular-nums text-lapis">{o.hours}</dd>
-                </div>
-              ))}
-            </dl>
+            <div className="mt-4">
+              <OfficeStatusLine lang={lang} />
+            </div>
+            <div className="mt-4">
+              <OfficeWeekList lang={lang} />
+            </div>
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2">

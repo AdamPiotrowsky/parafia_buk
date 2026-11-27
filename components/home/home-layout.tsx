@@ -4,6 +4,7 @@ import { ArrowRight, ArrowUpRight } from "lucide-react";
 
 import { AmbientVideo } from "@/components/ambient-video";
 import { Divider, Eyebrow } from "@/components/ornament";
+import { OfficeStatusLine, OfficeWeekStrip } from "@/components/office-hours";
 import { SacredImage } from "@/components/sacred-image";
 import { churches } from "@/lib/history";
 import type { HomeTexts } from "@/lib/home";
@@ -143,13 +144,17 @@ export function HomeBody({ t, today }: { t: HomeTexts; today: React.ReactNode })
             </div>
           </div>
           {t.masses.note && <p className="mt-6 text-sm text-ink-muted">{t.masses.note}</p>}
-          <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-line pt-6">
-            <p className="text-sm text-ink-soft">
-              <strong className="text-ink">{t.masses.officeLabel}:</strong> {t.masses.office}
-            </p>
-            <Link href={t.masses.fullHref} className="inline-flex items-center gap-1 text-sm font-semibold text-lapis hover:text-gold">
-              {t.masses.full} <ArrowRight size={15} />
-            </Link>
+          <Link href={t.masses.fullHref} className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-lapis hover:text-gold">
+            {t.masses.full} <ArrowRight size={15} />
+          </Link>
+
+          {/* Biuro parafialne: cały tydzień w jednym rzędzie — od razu widać, w które dni jest otwarte */}
+          <div className="mt-8 border-t border-line pt-6">
+            <div className="mb-4 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+              <p className="text-[0.7rem] font-bold uppercase tracking-[0.25em] text-gold">{t.masses.officeLabel}</p>
+              <OfficeStatusLine lang={t.lang} />
+            </div>
+            <OfficeWeekStrip lang={t.lang} />
           </div>
         </div>
       </section>

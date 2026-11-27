@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 
 import { churches } from "@/lib/history";
+import type { Locale } from "@/lib/i18n/config";
 import { site } from "@/lib/site";
 
 export type Shortcut = {
@@ -89,6 +90,7 @@ export const variants = [
 
 /* Teksty wspólnego układu strony głównej (components/home/home-layout.tsx) w jednym języku */
 export type HomeTexts = {
+  lang: Locale;
   hero: { diocese: string; parish: [string, string]; sanctuary: [string, string] };
   shortcuts: Shortcut[];
   masses: {
@@ -97,7 +99,6 @@ export type HomeTexts = {
     weekday: string;
     note?: string;
     officeLabel: string;
-    office: string;
     full: string;
     fullHref: string;
   };
@@ -124,6 +125,7 @@ export type HomeTexts = {
 const [faraPl, krzyzPl] = churches;
 
 export const plHome: HomeTexts = {
+  lang: "pl",
   hero: {
     diocese: site.diocese,
     parish: ["Parafia św. Stanisława", "w Buku"],
@@ -135,7 +137,6 @@ export const plHome: HomeTexts = {
     sunday: "Niedziele i święta",
     weekday: "Dni powszednie",
     officeLabel: "Biuro parafialne",
-    office: site.officeHours.map((o) => `${o.days} ${o.hours}`).join(" · "),
     full: "Pełny porządek",
     fullHref: "/msze",
   },

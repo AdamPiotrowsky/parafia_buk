@@ -27,6 +27,7 @@ export function foreignHome(lang: ForeignLocale): HomeTexts {
   const u = ui[lang];
 
   return {
+    lang,
     hero: { diocese: u.diocese, parish: p.hero.parish, sanctuary: p.hero.sanctuary },
     shortcuts: shortcutLinks.map(({ key, path, icon, external, polish }) => ({
       ...p.shortcuts[key],
@@ -40,7 +41,6 @@ export function foreignHome(lang: ForeignLocale): HomeTexts {
       weekday: p.weekday,
       note: t.massNote,
       officeLabel: p.officeLabel,
-      office: u.officeHours.map((o) => `${o.days} ${o.hours}`).join(" · "),
       full: p.fullSchedule,
       fullHref: href("/msze", lang),
     },
